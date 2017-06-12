@@ -23,7 +23,6 @@ app_config = connection.list_app_info("app_name")
 # create app
 app_conf = {
     "containers_per_cpu": 8,
-    "app_name": "app_name",
     "env_vars": {
         "test": "blabla",
         "test3t2t32": "tesg4ehgee"
