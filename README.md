@@ -5,6 +5,9 @@ translates all of Nebula [API](http://nebula.readthedocs.io/en/latest/api/) call
 
 # How To Use
 ```python
+# install from PyPi
+pip install NebulaPythonSDK
+
 # Load API wrapper from library
 from NebulaPythonSDK import Nebula
 
