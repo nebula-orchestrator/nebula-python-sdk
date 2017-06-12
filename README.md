@@ -39,9 +39,6 @@ app_conf = {
             "81": 80
         }
     ],
-    "_id": {
-        "$oid": "581a0e297a3a0f000aa1012d"
-    },
     "docker_image": "httpd"
 }
 connection.create_app("app_name", app_conf)
