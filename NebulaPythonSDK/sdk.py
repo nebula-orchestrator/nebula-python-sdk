@@ -62,7 +62,7 @@ class Nebula:
         url = self.host + "/api/apps/" + app + "/update"
         payload = json.dumps(config)
         headers = self.headers
-        response = requests.request("POST", url, data=payload, headers=headers)
+        response = requests.request("PUT", url, data=payload, headers=headers)
         return response
 
     def roll_app(self, app):
