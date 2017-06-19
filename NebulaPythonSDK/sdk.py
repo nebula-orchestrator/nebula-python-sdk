@@ -3,11 +3,12 @@ import requests, base64, json
 
 class Nebula:
 
-    def __init__(self, username, password, host, protocol="http"):
+    def __init__(self, username, password, host, port=80, protocol="http"):
         self.username = username
         self.password = password
         self.protocol = protocol
-        self.host = protocol + "://" + host
+        self.protocol = port
+        self.host = protocol + "://" + host + ":" + str(port)
         self.basic_auth = base64.b64encode(username + ":" + password)
         self.headers = {
             'authorization': "Basic " + self.basic_auth,
