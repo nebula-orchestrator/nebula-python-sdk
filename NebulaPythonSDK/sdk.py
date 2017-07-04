@@ -71,3 +71,9 @@ class Nebula:
         headers = self.headers
         response = requests.request("POST", url, headers=headers)
         return response
+
+    def check_api(self):
+        url = self.host + "/api/status"
+        headers = self.headers
+        response = requests.request("GET", url, headers=headers)
+        return response
