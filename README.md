@@ -44,7 +44,9 @@ app_conf = {
             "81": 80
         }
     ],
-    "docker_image": "httpd"
+    "docker_image": "httpd",
+    "privileged": False,
+    "devices": []
 }
 connection.create_app("app_name", app_conf)
 ```
