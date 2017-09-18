@@ -33,7 +33,7 @@ app_conf = {
         "test3t2t32": "tesg4ehgee"
     },
     "docker_ulimits": [],
-    "network_mode": "bridge",
+    "networks": ["nebula"],
     "running": True,
     "volumes": ["/tmp:/tmp/1", "/var/tmp/:/var/tmp/1:ro"],
     "containers_per": {
