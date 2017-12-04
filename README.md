@@ -1,5 +1,5 @@
 # Nebula-Python-SDK
-An SDK for managing [nebula](http://nebula.readthedocs.io/en/latest/) via python.
+An SDK for managing [nebula](https://nebula-orchestrator.github.io/) via python.
 
 translates all of Nebula [API](http://nebula.readthedocs.io/en/latest/api/) calls to something more pythonic.
 
