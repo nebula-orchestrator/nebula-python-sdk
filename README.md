@@ -16,7 +16,7 @@ now use it in your code
 from NebulaPythonSDK import Nebula
 
 # Create API object.
-# port defaults to 80 and protocol defaults to http if not set
+# port defaults to 80, protocol defaults & request_timeout defaults to 60 to http if any of them is not set.
 connection = Nebula(username="your_nebula_user", password="your_nebula_pass", host="nebula.example.com", port=80, protocol="http", request_timeout=60)
 
 # List apps
