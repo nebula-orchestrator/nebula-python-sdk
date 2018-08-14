@@ -1,14 +1,19 @@
 __author__ = 'Naor Livne'
 __author_email__ = 'naorlivne@gmail.com'
-__version__ = '1.3.0'
+__version__ = '1.3.1'
 
 from setuptools import setup, find_packages
+
+with open('README.md') as f:
+    long_description = f.read()
 
 setup(name='NebulaPythonSDK',
       author=__author__,
       author_email=__author_email__,
       version=__version__,
       description="NebulaPythonSDK is a Pythonic SDK to manage Nebula container orchestrator",
+      long_description=long_description,
+      long_description_content_type='text/markdown',
       packages=find_packages(exclude=['contrib', 'docs', 'tests']),
       scripts=['setup.py'],
       license="GPLv3",
