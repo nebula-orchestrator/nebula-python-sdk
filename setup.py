@@ -1,6 +1,6 @@
 __author__ = 'Naor Livne'
 __author_email__ = 'naorlivne@gmail.com'
-__version__ = '1.3.1'
+__version__ = '1.3.2'
 
 from setuptools import setup, find_packages
 
@@ -20,7 +20,7 @@ setup(name='NebulaPythonSDK',
       keywords="nebula container orchestrator sdk",
       url="https://github.com/nebula-orchestrator/nebula-python-sdk",
       install_requires=['requests>=2.3.0'],
-      classifiers=["Development Status :: 4 - Beta",
+      classifiers=["Development Status :: 5 - Production/Stable",
                    "Environment :: Other Environment",
                    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
                    "Operating System :: OS Independent",
