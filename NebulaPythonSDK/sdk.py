@@ -85,6 +85,13 @@ class Nebula:
         response = requests.request("POST", url, headers=headers, timeout=self.request_timeout)
         return response
 
+    # prune unused images on all devices running app on them
+    def prune_images(self, app):
+        url = self.host + "/api/apps/" + app + "/prune"
+        headers = self.headers
+        response = requests.request("POST", url, headers=headers, timeout=self.request_timeout)
+        return response
+
     # check that the contacted api is responding as expected
     def check_api(self):
         url = self.host + "/api/status"
