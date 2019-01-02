@@ -53,3 +53,5 @@ connection.create_app("app_name", app_conf)
 ```
 
 Note that the response returned is a requests formatted response.
+
+# NOTE THIS IS A POC BRANCH WHICH RADICALLY BREAKS EVERYTHING AND IS DESIGNED TO IMPLEMENT A NEW COMMUNICATION METHOD based around monotonic ID's (inspired by Kafka) inside the API and memoization rather then using RabbitMQ. 
