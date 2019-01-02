@@ -78,13 +78,6 @@ class Nebula:
         response = requests.request("PUT", url, data=payload, headers=headers, timeout=self.request_timeout)
         return response
 
-    # rolling restart an app, only requires the app name
-    def roll_app(self, app):
-        url = self.host + "/api/apps/" + app + "/roll"
-        headers = self.headers
-        response = requests.request("POST", url, headers=headers, timeout=self.request_timeout)
-        return response
-
     # prune unused images on all devices running app on them
     def prune_images(self, app):
         url = self.host + "/api/apps/" + app + "/prune"
