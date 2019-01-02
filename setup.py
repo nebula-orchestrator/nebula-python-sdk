@@ -1,6 +1,6 @@
 __author__ = 'Naor Livne'
 __author_email__ = 'naorlivne@gmail.com'
-__version__ = '1.6.0'
+__version__ = '2.0.0a'
 
 from setuptools import setup, find_packages
 
