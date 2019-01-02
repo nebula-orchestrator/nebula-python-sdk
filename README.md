@@ -35,6 +35,7 @@ app_conf = {
     "docker_ulimits": [],
     "networks": ["nebula"],
     "running": True,
+    "rolling_restart": False,
     "volumes": ["/tmp:/tmp/1", "/var/tmp/:/var/tmp/1:ro"],
     "containers_per": {
         "cpu": 6
@@ -49,6 +50,13 @@ app_conf = {
     "devices": []
 }
 connection.create_app("app_name", app_conf)
+
+# create device group
+# TODO - add example of create a device_group
+
+# list device group info
+# TODO - add example of listing a device group info
+
 
 ```
 
