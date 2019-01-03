@@ -41,9 +41,11 @@ class BaseTests(TestCase):
         # TODO - finish the tests
         pass
 
-    def test_delete_app_does_not_exist(self):
-        # TODO - finish the tests
-        pass
+    def test_delete_app_does_not_exist(self, app="testappwhichdoesnotexist"):
+        nebula_connection_object = nebula_connection()
+        reply = nebula_connection_object.delete_app(app)
+        self.assertEqual(reply["status_code"], 403)
+        self.assertEqual(reply["reply"]["app_exists"], False)
 
     def test_list_apps(self):
         nebula_connection_object = nebula_connection()
