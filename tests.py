@@ -20,8 +20,8 @@ class BaseTests(TestCase):
     def test_check_api(self):
         nebula_connection_object = nebula_connection()
         reply = nebula_connection_object.check_api()
-        if reply["status_code"] != 200 or reply["reply"]["api_available"] is not True:
-            raise Exception("check GET /status failed")
+        self.assertEqual(reply["status_code"], 200)
+        self.assertEqual(reply["reply"]["api_available"], True)
 
     def test_create_app_success(self):
         # TODO - finish the tests
@@ -46,14 +46,14 @@ class BaseTests(TestCase):
     def test_list_apps(self):
         nebula_connection_object = nebula_connection()
         reply = nebula_connection_object.list_apps()
-        if reply["status_code"] != 200 or isinstance(reply["reply"]["apps"], list) is False:
-            raise Exception("check  GET /apps failed")
+        self.assertEqual(reply["status_code"], 200)
+        self.assertEqual(isinstance(reply["reply"]["apps"], list), True)
 
     def test_list_app_info(self, app="test"):
         nebula_connection_object = nebula_connection()
         reply = nebula_connection_object.list_app_info(app)
-        if reply["status_code"] != 200 or reply["reply"]["app_name"] != app:
-            raise Exception("check GET /app/" + app + " failed")
+        self.assertEqual(reply["status_code"], 200)
+        self.assertEqual(reply["reply"]["app_name"], app)
 
     def test_stop_app(self):
         # TODO - finish the tests
@@ -74,35 +74,31 @@ class BaseTests(TestCase):
     def test_prune_images(self):
         nebula_connection_object = nebula_connection()
         reply = nebula_connection_object.prune_images()
-        if reply["status_code"] != 202 or isinstance(reply["reply"]["prune_ids"], dict) is False:
-            raise Exception("check /prune failed")
+        self.assertEqual(reply["status_code"], 202)
+        self.assertEqual(isinstance(reply["reply"]["prune_ids"], dict), True)
 
     def test_prune_device_group_images(self, device_group="test"):
         nebula_connection_object = nebula_connection()
         reply = nebula_connection_object.prune__device_group_images(device_group)
         first_prune_id = reply["reply"]["prune_id"]
         reply = nebula_connection_object.prune__device_group_images(device_group)
-        if reply["status_code"] != 202 or reply["reply"]["prune_id"] != first_prune_id + 1:
-            raise Exception("check /prune failed")
+        self.assertEqual(reply["status_code"], 202)
+        self.assertEqual(reply["reply"]["prune_id"], first_prune_id + 1)
 
     def test_list_device_group_info(self, device_group="test"):
         nebula_connection_object = nebula_connection()
         reply = nebula_connection_object.list_device_group_info(device_group)
-        if reply["status_code"] != 200:
-            raise Exception("check /device_groups/" + device_group + "/info failed")
+        self.assertEqual(reply["status_code"], 200)
 
     def test_list_device_group(self, device_group="test"):
         nebula_connection_object = nebula_connection()
         reply = nebula_connection_object.list_device_group(device_group)
-        if reply["status_code"] != 200:
-            raise Exception("check /device_groups/" + device_group + " failed")
+        self.assertEqual(reply["status_code"], 200)
 
     def test_list_device_groups(self):
         nebula_connection_object = nebula_connection()
         reply = nebula_connection_object.list_device_groups()
-        if reply["status_code"] != 200:
-            raise Exception("check GET /device_groups failed")
-
+        self.assertEqual(reply["status_code"], 200)
     def test_create_device_group_success(self):
         # TODO - finish the tests
         pass
@@ -115,9 +111,10 @@ class BaseTests(TestCase):
         # TODO - finish the tests
         pass
 
-    def test_delete_device_group_does_not_exists(self):
-        # TODO - finish the tests
-        pass
+    def test_delete_device_group_does_not_exists(self, device_group="test_non_existing_group"):
+        nebula_connection_object = nebula_connection()
+        reply = nebula_connection_object.delete_device_group(device_group)
+        self.assertEqual(reply["status_code"], 403)
 
     def test_update_device_group(self):
         # TODO - finish the tests
