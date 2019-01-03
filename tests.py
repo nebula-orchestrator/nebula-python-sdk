@@ -127,19 +127,20 @@ class BaseTests(TestCase):
             self.assertEqual(isinstance(app["starting_ports"], list), True)
             self.assertEqual(isinstance(app["volumes"], list), True)
 
-
     def test_list_device_group(self, device_group="test"):
         # TODO - create device_group before testing & change device_group name to something that not likely to be used
         nebula_connection_object = nebula_connection()
         reply = nebula_connection_object.list_device_group(device_group)
         self.assertEqual(reply["status_code"], 200)
-        # TODO - check the complete response
+        self.assertEqual(isinstance(reply["reply"]["device_group_id"], int), True)
+        self.assertEqual(isinstance(reply["reply"]["apps"], list), True)
+        self.assertEqual(reply["reply"]["device_group"], device_group)
 
     def test_list_device_groups(self):
         nebula_connection_object = nebula_connection()
         reply = nebula_connection_object.list_device_groups()
         self.assertEqual(reply["status_code"], 200)
-        # TODO - check the complete response
+        self.assertEqual(isinstance(reply["reply"]["device_groups"], list), True)
 
     def test_create_device_group_success(self):
         # TODO - finish the tests
