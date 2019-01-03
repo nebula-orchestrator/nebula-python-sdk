@@ -43,6 +43,8 @@ class BaseTests(TestCase):
 
     def test_delete_app_does_not_exist(self, app="test_app_which_does_not_exist"):
         nebula_connection_object = nebula_connection()
+        # deleting twice so even if the app does exist prior to running the check it won't on the 2nd run
+        nebula_connection_object.delete_app(app)
         reply = nebula_connection_object.delete_app(app)
         self.assertEqual(reply["status_code"], 403)
         self.assertEqual(reply["reply"]["app_exists"], False)
@@ -156,6 +158,9 @@ class BaseTests(TestCase):
 
     def test_delete_device_group_does_not_exists(self, device_group="test_non_existing_group"):
         nebula_connection_object = nebula_connection()
+        # deleting twice so even if the device_group doesn't exist prior to running the check prior to running the
+        # check it won't on the 2nd run
+        nebula_connection_object.delete_device_group(device_group)
         reply = nebula_connection_object.delete_device_group(device_group)
         self.assertEqual(reply["status_code"], 403)
         self.assertEqual(reply["reply"]["device_group_exists"], False)
