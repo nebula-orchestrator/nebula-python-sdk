@@ -12,13 +12,13 @@ class Nebula:
         self.protocol = protocol
         self.port = port
         self.host = protocol + "://" + host + ":" + str(port)
-        # TODO - add support for no auth
-        self.basic_auth = base64.b64encode(username + ":" + password)
         self.headers = {
-            'authorization': "Basic " + self.basic_auth,
             'content-type': "application/json",
             'cache-control': "no-cache"
         }
+        if username is not None and password is not None:
+            self.basic_auth = base64.b64encode(username + ":" + password)
+            self.headers["authorization"] = "Basic " + self.basic_auth
         self.API_VERSION = "v2"
 
     # create a new nebula app, requires the app name to create and a complete dict of the config values for it
