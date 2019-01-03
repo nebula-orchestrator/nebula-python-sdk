@@ -72,12 +72,18 @@ class BaseTests(TestCase):
         pass
 
     def test_prune_images(self):
-        # TODO - finish the tests
-        pass
+        nebula_connection_object = nebula_connection()
+        reply = nebula_connection_object.prune_images()
+        if reply["status_code"] != 202 or isinstance(reply["reply"]["prune_ids"], dict) is False:
+            raise Exception("check /prune failed")
 
-    def test_prune_device_group_images(self):
-        # TODO - finish the tests
-        pass
+    def test_prune_device_group_images(self, device_group="test"):
+        nebula_connection_object = nebula_connection()
+        reply = nebula_connection_object.prune__device_group_images(device_group)
+        first_prune_id = reply["reply"]["prune_id"]
+        reply = nebula_connection_object.prune__device_group_images(device_group)
+        if reply["status_code"] != 202 or reply["reply"]["prune_id"] != first_prune_id + 1:
+            raise Exception("check /prune failed")
 
     def test_list_device_group_info(self, device_group="test"):
         nebula_connection_object = nebula_connection()
