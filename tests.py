@@ -99,6 +99,7 @@ class BaseTests(TestCase):
         nebula_connection_object = nebula_connection()
         reply = nebula_connection_object.list_device_groups()
         self.assertEqual(reply["status_code"], 200)
+
     def test_create_device_group_success(self):
         # TODO - finish the tests
         pass
