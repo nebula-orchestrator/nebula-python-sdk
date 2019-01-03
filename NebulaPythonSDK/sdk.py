@@ -136,7 +136,8 @@ class Nebula:
         filtered_response = {"status_code": response.status_code, "reply": response.json()}
         return filtered_response
 
-    # create a new nebula app, requires the app name to create and a complete dict of the config values for it
+    # create a new nebula delete_device_group, requires the app name to create and a complete dict of the config values
+    # for it
     def create_device_group(self, device_group, config):
         url = self.host + "/api/" + self.API_VERSION + "/device_groups/" + device_group
         payload = json.dumps(config)
@@ -145,7 +146,7 @@ class Nebula:
         filtered_response = {"status_code": response.status_code, "reply": response.json()}
         return filtered_response
 
-    # delete an existing nebula app, no confirmation required in SDK so be careful
+    # delete an existing nebula delete_device_group, no confirmation required in SDK so be careful
     def delete_device_group(self, device_group):
         url = self.host + "/api/" + self.API_VERSION + "/device_groups/" + device_group
         headers = self.headers
