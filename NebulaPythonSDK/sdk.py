@@ -79,9 +79,16 @@ class Nebula:
         response = requests.request("PUT", url, data=payload, headers=headers, timeout=self.request_timeout)
         return response
 
-    # prune unused images on all devices running app on them
-    def prune_images(self, app):
-        url = self.host + "/api/" + self.API_VERSION + "/apps/" + app + "/prune"
+    # prune unused images on all devices
+    def prune_images(self):
+        url = self.host + "/api/" + self.API_VERSION + "/prune"
+        headers = self.headers
+        response = requests.request("POST", url, headers=headers, timeout=self.request_timeout)
+        return response
+
+    # prune unused images on all devices that are part of the device_group given
+    def prune__device_group_images(self, device_groups):
+        url = self.host + "/api/" + self.API_VERSION + "/device_groups/" + device_groups + "/prune"
         headers = self.headers
         response = requests.request("POST", url, headers=headers, timeout=self.request_timeout)
         return response
