@@ -99,3 +99,47 @@ class Nebula:
         headers = self.headers
         response = requests.request("GET", url, headers=headers, timeout=self.request_timeout)
         return response
+
+    # list the info of all apps and all data of a given device_group
+    def list_device_group_info(self, device_group):
+        url = self.host + "/api/" + self.API_VERSION + "/device_groups/" + device_group + "/info"
+        headers = self.headers
+        response = requests.request("GET", url, headers=headers, timeout=self.request_timeout)
+        return response
+
+    # list all device_groups
+    def list_device_groups(self):
+        url = self.host + "/api/" + self.API_VERSION + "/device_groups"
+        headers = self.headers
+        response = requests.request("GET", url, headers=headers, timeout=self.request_timeout)
+        return response
+
+    # list device_group configuration
+    def list_device_group(self, device_group):
+        url = self.host + "/api/" + self.API_VERSION + "/device_groups/" + device_group
+        headers = self.headers
+        response = requests.request("GET", url, headers=headers, timeout=self.request_timeout)
+        return response
+
+    # create a new nebula app, requires the app name to create and a complete dict of the config values for it
+    def create_device_group(self, device_group, config):
+        url = self.host + "/api/" + self.API_VERSION + "/device_groups/" + device_group
+        payload = json.dumps(config)
+        headers = self.headers
+        response = requests.request("POST", url, data=payload, headers=headers, timeout=self.request_timeout)
+        return response
+
+    # delete an existing nebula app, no confirmation required in SDK so be careful
+    def delete_device_group(self, device_group):
+        url = self.host + "/api/" + self.API_VERSION + "/device_groups/" + device_group
+        headers = self.headers
+        response = requests.request("DELETE", url, headers=headers, timeout=self.request_timeout)
+        return response
+
+    # update apps in a device group
+    def update_device_group(self, device_group, config):
+        url = self.host + "/api/" + self.API_VERSION + "/device_groups/" + device_group + "/update"
+        payload = json.dumps(config)
+        headers = self.headers
+        response = requests.request("POST", url, data=payload, headers=headers, timeout=self.request_timeout)
+        return response
