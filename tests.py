@@ -1,6 +1,6 @@
 from unittest import TestCase
 import os
-from NebulaPythonSDK.sdk import Nebula
+from NebulaPythonSDK import Nebula
 
 
 # the following unit tests require a working nebula manager to test against and having the envvars in the
