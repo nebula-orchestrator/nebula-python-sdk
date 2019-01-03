@@ -2,6 +2,7 @@ from unittest import TestCase
 import os
 from NebulaPythonSDK.sdk import Nebula
 
+
 def nebula_connection():
     nebula_user = os.getenv("USER")
     nebula_password = os.getenv("PASSWORD")
@@ -19,5 +20,99 @@ class BaseTests(TestCase):
     def test_check_api(self):
         nebula_connection_object = nebula_connection()
         reply = nebula_connection_object.check_api()
+        if reply["status_code"] != 200 or reply["reply"]["api_available"] is not True:
+            raise Exception("check GET /status failed")
+
+    def test_create_app_success(self):
+        # TODO - finish the tests
+        pass
+
+    def test_create_app_already_exists(self):
+        # TODO - finish the tests
+        pass
+
+    def test_create_app_missing_params(self):
+        # TODO - finish the tests
+        pass
+
+    def test_delete_app_success(self):
+        # TODO - finish the tests
+        pass
+
+    def test_delete_app_does_not_exist(self):
+        # TODO - finish the tests
+        pass
+
+    def test_list_apps(self):
+        nebula_connection_object = nebula_connection()
+        reply = nebula_connection_object.list_apps()
+        if reply["status_code"] != 200 or isinstance(reply["reply"]["apps"], list) is False:
+            raise Exception("check  GET /apps failed")
+
+    def test_list_app_info(self, app="test"):
+        nebula_connection_object = nebula_connection()
+        reply = nebula_connection_object.list_app_info(app)
+        if reply["status_code"] != 200 or reply["reply"]["app_name"] != app:
+            raise Exception("check GET /app/" + app + " failed")
+
+    def test_stop_app(self):
+        # TODO - finish the tests
+        pass
+
+    def test_start_app(self):
+        # TODO - finish the tests
+        pass
+
+    def test_restart_app(self):
+        # TODO - finish the tests
+        pass
+
+    def test_update_app(self):
+        # TODO - finish the tests
+        pass
+
+    def test_prune_images(self):
+        # TODO - finish the tests
+        pass
+
+    def test_prune_device_group_images(self):
+        # TODO - finish the tests
+        pass
+
+    def test_list_device_group_info(self, device_group="test"):
+        nebula_connection_object = nebula_connection()
+        reply = nebula_connection_object.list_device_group_info(device_group)
         if reply["status_code"] != 200:
-            raise Exception("check /status failed")
+            raise Exception("check /device_groups/" + device_group + "/info failed")
+
+    def test_list_device_group(self, device_group="test"):
+        nebula_connection_object = nebula_connection()
+        reply = nebula_connection_object.list_device_group(device_group)
+        if reply["status_code"] != 200:
+            raise Exception("check /device_groups/" + device_group + " failed")
+
+    def test_list_device_groups(self):
+        nebula_connection_object = nebula_connection()
+        reply = nebula_connection_object.list_device_groups()
+        if reply["status_code"] != 200:
+            raise Exception("check GET /device_groups failed")
+
+    def test_create_device_group_success(self):
+        # TODO - finish the tests
+        pass
+
+    def test_create_device_group_already_exists(self):
+        # TODO - finish the tests
+        pass
+
+    def test_delete_device_group_success(self):
+        # TODO - finish the tests
+        pass
+
+    def test_delete_device_group_does_not_exists(self):
+        # TODO - finish the tests
+        pass
+
+    def test_update_device_group(self):
+        # TODO - finish the tests
+        pass
