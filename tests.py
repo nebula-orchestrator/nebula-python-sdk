@@ -57,6 +57,7 @@ class BaseTests(TestCase):
             self.assertEqual(isinstance(app, unicode), True)
 
     def test_list_app_info(self, app="test"):
+        # TODO - create app before testing it & change the app default name to something that not likely to be used
         nebula_connection_object = nebula_connection()
         reply = nebula_connection_object.list_app_info(app)
         self.assertEqual(reply["status_code"], 200)
@@ -96,6 +97,7 @@ class BaseTests(TestCase):
         self.assertEqual(isinstance(reply["reply"]["prune_ids"], dict), True)
 
     def test_prune_device_group_images(self, device_group="test"):
+        # TODO - create device_group before testing & change device_group name to something that not likely to be used
         nebula_connection_object = nebula_connection()
         reply = nebula_connection_object.prune__device_group_images(device_group)
         first_prune_id = reply["reply"]["prune_id"]
@@ -104,12 +106,15 @@ class BaseTests(TestCase):
         self.assertEqual(reply["reply"]["prune_id"], first_prune_id + 1)
 
     def test_list_device_group_info(self, device_group="test"):
+        # TODO - create app before testing it & change the app default name to something that not likely to be used
+        # TODO - create device_group before testing & change device_group name to something that not likely to be used
         nebula_connection_object = nebula_connection()
         reply = nebula_connection_object.list_device_group_info(device_group)
         self.assertEqual(reply["status_code"], 200)
         # TODO - check the complete response
 
     def test_list_device_group(self, device_group="test"):
+        # TODO - create device_group before testing & change device_group name to something that not likely to be used
         nebula_connection_object = nebula_connection()
         reply = nebula_connection_object.list_device_group(device_group)
         self.assertEqual(reply["status_code"], 200)
