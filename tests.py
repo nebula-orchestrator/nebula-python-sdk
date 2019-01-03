@@ -111,7 +111,22 @@ class BaseTests(TestCase):
         nebula_connection_object = nebula_connection()
         reply = nebula_connection_object.list_device_group_info(device_group)
         self.assertEqual(reply["status_code"], 200)
-        # TODO - check the complete response
+        self.assertEqual(isinstance(reply["reply"]["prune_id"], int), True)
+        self.assertEqual(isinstance(reply["reply"]["device_group_id"], int), True)
+        for app in reply["reply"]["apps"]:
+            self.assertEqual(isinstance(app["app_id"], int), True)
+            self.assertEqual(isinstance(app["containers_per"], dict), True)
+            self.assertEqual(isinstance(app["app_name"], unicode), True)
+            self.assertEqual(isinstance(app["devices"], list), True)
+            self.assertEqual(isinstance(app["docker_image"], unicode), True)
+            self.assertEqual(isinstance(app["env_vars"], dict), True)
+            self.assertEqual(isinstance(app["networks"], list), True)
+            self.assertEqual(isinstance(app["privileged"], bool), True)
+            self.assertEqual(isinstance(app["rolling_restart"], bool), True)
+            self.assertEqual(isinstance(app["running"], bool), True)
+            self.assertEqual(isinstance(app["starting_ports"], list), True)
+            self.assertEqual(isinstance(app["volumes"], list), True)
+
 
     def test_list_device_group(self, device_group="test"):
         # TODO - create device_group before testing & change device_group name to something that not likely to be used
