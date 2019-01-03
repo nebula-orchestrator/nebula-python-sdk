@@ -48,14 +48,28 @@ class BaseTests(TestCase):
     def test_list_apps(self):
         nebula_connection_object = nebula_connection()
         reply = nebula_connection_object.list_apps()
+        app_list = reply["reply"]["apps"]
         self.assertEqual(reply["status_code"], 200)
-        self.assertEqual(isinstance(reply["reply"]["apps"], list), True)
+        self.assertEqual(isinstance(app_list, list), True)
+        for app in app_list:
+            self.assertEqual(isinstance(app, unicode), True)
 
     def test_list_app_info(self, app="test"):
         nebula_connection_object = nebula_connection()
         reply = nebula_connection_object.list_app_info(app)
         self.assertEqual(reply["status_code"], 200)
+        self.assertEqual(isinstance(reply["reply"]["app_id"], int), True)
+        self.assertEqual(isinstance(reply["reply"]["containers_per"], dict), True)
         self.assertEqual(reply["reply"]["app_name"], app)
+        self.assertEqual(isinstance(reply["reply"]["devices"], list), True)
+        self.assertEqual(isinstance(reply["reply"]["docker_image"], unicode), True)
+        self.assertEqual(isinstance(reply["reply"]["env_vars"], dict), True)
+        self.assertEqual(isinstance(reply["reply"]["networks"], list), True)
+        self.assertEqual(isinstance(reply["reply"]["privileged"], bool), True)
+        self.assertEqual(isinstance(reply["reply"]["rolling_restart"], bool), True)
+        self.assertEqual(isinstance(reply["reply"]["running"], bool), True)
+        self.assertEqual(isinstance(reply["reply"]["starting_ports"], list), True)
+        self.assertEqual(isinstance(reply["reply"]["volumes"], list), True)
 
     def test_stop_app(self):
         # TODO - finish the tests
@@ -118,6 +132,7 @@ class BaseTests(TestCase):
         nebula_connection_object = nebula_connection()
         reply = nebula_connection_object.delete_device_group(device_group)
         self.assertEqual(reply["status_code"], 403)
+        self.assertEqual(reply["reply"]["device_group_exists"], False)
 
     def test_update_device_group(self):
         # TODO - finish the tests
