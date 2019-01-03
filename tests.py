@@ -3,6 +3,8 @@ import os
 from NebulaPythonSDK.sdk import Nebula
 
 
+# the following unit tests require a working nebula manager to test against and having the envvars in the
+# nebula_connection function declared if not using the default values
 def nebula_connection():
     nebula_user = os.getenv("USER")
     nebula_password = os.getenv("PASSWORD")
