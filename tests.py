@@ -17,6 +17,22 @@ def nebula_connection():
     return connection
 
 
+def create_temp_app(nebula_connection_object, app):
+    app_conf = {
+        "starting_ports": [80],
+        "containers_per": {"server": 1},
+        "env_vars": {"TEST": "test123"},
+        "docker_image": "nginx",
+        "running": True,
+        "volumes": [],
+        "networks": ["nebula", "bridge"],
+        "devices": [],
+        "privileged": False,
+        "rolling_restart": False
+    }
+    reply = nebula_connection_object.create_app(app, app_conf)
+    return reply
+
 class BaseTests(TestCase):
 
     def test_check_api(self):
@@ -25,21 +41,34 @@ class BaseTests(TestCase):
         self.assertEqual(reply["status_code"], 200)
         self.assertEqual(reply["reply"]["api_available"], True)
 
-    def test_create_app_success(self):
-        # TODO - finish the tests
-        pass
-
-    def test_create_app_already_exists(self):
-        # TODO - finish the tests
-        pass
-
-    def test_create_app_missing_params(self):
-        # TODO - finish the tests
-        pass
-
-    def test_delete_app_success(self):
-        # TODO - finish the tests
-        pass
+    def test_app_creation_flow(self, app="unit_test_app"):
+        nebula_connection_object = nebula_connection()
+        # check app creation works
+        reply = create_temp_app(nebula_connection_object, app)
+        self.assertEqual(reply["status_code"], 200)
+        self.assertEqual(reply["reply"]["app_id"], 1)
+        self.assertEqual(reply["reply"]["containers_per"], {"server": 1})
+        self.assertEqual(reply["reply"]["app_name"], app)
+        self.assertEqual(reply["reply"]["devices"], [])
+        self.assertEqual(reply["reply"]["docker_image"], "nginx")
+        self.assertEqual(reply["reply"]["env_vars"], {"TEST": "test123"})
+        self.assertEqual(reply["reply"]["networks"], ["nebula", "bridge"])
+        self.assertFalse(reply["reply"]["privileged"])
+        self.assertFalse(reply["reply"]["rolling_restart"])
+        self.assertTrue(reply["reply"]["running"])
+        self.assertEqual(reply["reply"]["starting_ports"], [80])
+        self.assertEqual(reply["reply"]["volumes"], [])
+        # check that the reply in the case of trying to reuse an existing app name noting breaks
+        reply = create_temp_app(nebula_connection_object, app)
+        self.assertEqual(reply["status_code"], 403)
+        # check app deletion works
+        reply = nebula_connection_object.delete_app(app)
+        self.assertEqual(reply["status_code"], 200)
+        self.assertEqual(reply["reply"], {})
+        # check app creation failure with missing params
+        reply = nebula_connection_object.create_app(app, {})
+        self.assertEqual(reply["status_code"], 400)
+        self.assertTrue(isinstance(reply["reply"]["missing_parameters"], list))
 
     def test_delete_app_does_not_exist(self, app="test_app_which_does_not_exist"):
         nebula_connection_object = nebula_connection()
@@ -47,34 +76,34 @@ class BaseTests(TestCase):
         nebula_connection_object.delete_app(app)
         reply = nebula_connection_object.delete_app(app)
         self.assertEqual(reply["status_code"], 403)
-        self.assertEqual(reply["reply"]["app_exists"], False)
+        self.assertFalse(reply["reply"]["app_exists"])
 
     def test_list_apps(self):
         nebula_connection_object = nebula_connection()
         reply = nebula_connection_object.list_apps()
         app_list = reply["reply"]["apps"]
         self.assertEqual(reply["status_code"], 200)
-        self.assertEqual(isinstance(app_list, list), True)
+        self.assertTrue(isinstance(app_list, list))
         for app in app_list:
-            self.assertEqual(isinstance(app, unicode), True)
+            self.assertTrue(isinstance(app, unicode))
 
     def test_list_app_info(self, app="test"):
-        # TODO - create app before testing it & change the app default name to something that not likely to be used
+        # TODO - change the app default name to something that not likely to be used
         nebula_connection_object = nebula_connection()
         reply = nebula_connection_object.list_app_info(app)
         self.assertEqual(reply["status_code"], 200)
-        self.assertEqual(isinstance(reply["reply"]["app_id"], int), True)
-        self.assertEqual(isinstance(reply["reply"]["containers_per"], dict), True)
+        self.assertTrue(isinstance(reply["reply"]["app_id"], int))
+        self.assertTrue(isinstance(reply["reply"]["containers_per"], dict))
         self.assertEqual(reply["reply"]["app_name"], app)
-        self.assertEqual(isinstance(reply["reply"]["devices"], list), True)
-        self.assertEqual(isinstance(reply["reply"]["docker_image"], unicode), True)
-        self.assertEqual(isinstance(reply["reply"]["env_vars"], dict), True)
-        self.assertEqual(isinstance(reply["reply"]["networks"], list), True)
-        self.assertEqual(isinstance(reply["reply"]["privileged"], bool), True)
-        self.assertEqual(isinstance(reply["reply"]["rolling_restart"], bool), True)
-        self.assertEqual(isinstance(reply["reply"]["running"], bool), True)
-        self.assertEqual(isinstance(reply["reply"]["starting_ports"], list), True)
-        self.assertEqual(isinstance(reply["reply"]["volumes"], list), True)
+        self.assertTrue(isinstance(reply["reply"]["devices"], list))
+        self.assertTrue(isinstance(reply["reply"]["docker_image"], unicode))
+        self.assertTrue(isinstance(reply["reply"]["env_vars"], dict))
+        self.assertTrue(isinstance(reply["reply"]["networks"], list))
+        self.assertTrue(isinstance(reply["reply"]["privileged"], bool))
+        self.assertTrue(isinstance(reply["reply"]["rolling_restart"], bool))
+        self.assertTrue(isinstance(reply["reply"]["running"], bool))
+        self.assertTrue(isinstance(reply["reply"]["starting_ports"], list))
+        self.assertTrue(isinstance(reply["reply"]["volumes"], list))
 
     def test_stop_app(self):
         # TODO - finish the tests
@@ -96,10 +125,10 @@ class BaseTests(TestCase):
         nebula_connection_object = nebula_connection()
         reply = nebula_connection_object.prune_images()
         self.assertEqual(reply["status_code"], 202)
-        self.assertEqual(isinstance(reply["reply"]["prune_ids"], dict), True)
+        self.assertTrue(isinstance(reply["reply"]["prune_ids"], dict))
 
     def test_prune_device_group_images(self, device_group="test"):
-        # TODO - create device_group before testing & change device_group name to something that not likely to be used
+        # TODO - change device_group name to something that not likely to be used
         nebula_connection_object = nebula_connection()
         reply = nebula_connection_object.prune__device_group_images(device_group)
         first_prune_id = reply["reply"]["prune_id"]
@@ -108,41 +137,41 @@ class BaseTests(TestCase):
         self.assertEqual(reply["reply"]["prune_id"], first_prune_id + 1)
 
     def test_list_device_group_info(self, device_group="test"):
-        # TODO - create app before testing it & change the app default name to something that not likely to be used
-        # TODO - create device_group before testing & change device_group name to something that not likely to be used
+        # TODO -change the app default name to something that not likely to be used
+        # TODO - change device_group name to something that not likely to be used
         nebula_connection_object = nebula_connection()
         reply = nebula_connection_object.list_device_group_info(device_group)
         self.assertEqual(reply["status_code"], 200)
-        self.assertEqual(isinstance(reply["reply"]["prune_id"], int), True)
-        self.assertEqual(isinstance(reply["reply"]["device_group_id"], int), True)
+        self.assertTrue(isinstance(reply["reply"]["prune_id"], int))
+        self.assertTrue(isinstance(reply["reply"]["device_group_id"], int))
         for app in reply["reply"]["apps"]:
-            self.assertEqual(isinstance(app["app_id"], int), True)
-            self.assertEqual(isinstance(app["containers_per"], dict), True)
-            self.assertEqual(isinstance(app["app_name"], unicode), True)
-            self.assertEqual(isinstance(app["devices"], list), True)
-            self.assertEqual(isinstance(app["docker_image"], unicode), True)
-            self.assertEqual(isinstance(app["env_vars"], dict), True)
-            self.assertEqual(isinstance(app["networks"], list), True)
-            self.assertEqual(isinstance(app["privileged"], bool), True)
-            self.assertEqual(isinstance(app["rolling_restart"], bool), True)
-            self.assertEqual(isinstance(app["running"], bool), True)
-            self.assertEqual(isinstance(app["starting_ports"], list), True)
-            self.assertEqual(isinstance(app["volumes"], list), True)
+            self.assertTrue(isinstance(app["app_id"], int))
+            self.assertTrue(isinstance(app["containers_per"], dict))
+            self.assertTrue(isinstance(app["app_name"], unicode))
+            self.assertTrue(isinstance(app["devices"], list))
+            self.assertTrue(isinstance(app["docker_image"], unicode))
+            self.assertTrue(isinstance(app["env_vars"], dict))
+            self.assertTrue(isinstance(app["networks"], list))
+            self.assertTrue(isinstance(app["privileged"], bool))
+            self.assertTrue(isinstance(app["rolling_restart"], bool))
+            self.assertTrue(isinstance(app["running"], bool))
+            self.assertTrue(isinstance(app["starting_ports"], list))
+            self.assertTrue(isinstance(app["volumes"], list))
 
     def test_list_device_group(self, device_group="test"):
-        # TODO - create device_group before testing & change device_group name to something that not likely to be used
+        # TODO -change device_group name to something that not likely to be used
         nebula_connection_object = nebula_connection()
         reply = nebula_connection_object.list_device_group(device_group)
         self.assertEqual(reply["status_code"], 200)
-        self.assertEqual(isinstance(reply["reply"]["device_group_id"], int), True)
-        self.assertEqual(isinstance(reply["reply"]["apps"], list), True)
+        self.assertTrue(isinstance(reply["reply"]["device_group_id"], int))
+        self.assertTrue(isinstance(reply["reply"]["apps"], list))
         self.assertEqual(reply["reply"]["device_group"], device_group)
 
     def test_list_device_groups(self):
         nebula_connection_object = nebula_connection()
         reply = nebula_connection_object.list_device_groups()
         self.assertEqual(reply["status_code"], 200)
-        self.assertEqual(isinstance(reply["reply"]["device_groups"], list), True)
+        self.assertTrue(isinstance(reply["reply"]["device_groups"], list))
 
     def test_create_device_group_success(self):
         # TODO - finish the tests
@@ -163,7 +192,7 @@ class BaseTests(TestCase):
         nebula_connection_object.delete_device_group(device_group)
         reply = nebula_connection_object.delete_device_group(device_group)
         self.assertEqual(reply["status_code"], 403)
-        self.assertEqual(reply["reply"]["device_group_exists"], False)
+        self.assertFalse(reply["reply"]["device_group_exists"])
 
     def test_update_device_group(self):
         # TODO - finish the tests
