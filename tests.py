@@ -152,7 +152,11 @@ class BaseTests(TestCase):
 
         # check device_group creation works
         device_group_config ={"apps": [app]}
-        nebula_connection_object.create_device_group(device_group,device_group_config)
+        reply = nebula_connection_object.create_device_group(device_group, device_group_config)
+        self.assertEqual(reply["status_code"], 200)
+        self.assertTrue(reply["reply"]["device_group_id"], 1)
+        self.assertTrue(reply["reply"]["apps"], [app])
+        self.assertEqual(reply["reply"]["prune_id"], 1)
 
         # check list device_group works
         reply = nebula_connection_object.list_device_group(device_group)
@@ -188,6 +192,10 @@ class BaseTests(TestCase):
         self.assertEqual(reply["reply"]["prune_id"], first_prune_id + 1)
 
         # check update device_group works
+        reply = nebula_connection_object.update_device_group(device_group, {"apps": []})
+        self.assertEqual(reply["status_code"], 202)
+        self.assertTrue(reply["reply"]["device_group_id"], 2)
+        self.assertTrue(isinstance(reply["reply"]["apps"], list))
 
         # check device_group already exists works
 
