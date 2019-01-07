@@ -151,7 +151,7 @@ class BaseTests(TestCase):
         create_temp_app(nebula_connection_object, app)
 
         # check device_group creation works
-        device_group_config ={"apps": [app]}
+        device_group_config = {"apps": [app]}
         reply = nebula_connection_object.create_device_group(device_group, device_group_config)
         self.assertEqual(reply["status_code"], 200)
         self.assertTrue(reply["reply"]["device_group_id"], 1)
@@ -170,19 +170,19 @@ class BaseTests(TestCase):
         self.assertEqual(reply["status_code"], 200)
         self.assertTrue(isinstance(reply["reply"]["prune_id"], int))
         self.assertTrue(isinstance(reply["reply"]["device_group_id"], int))
-        for app in reply["reply"]["apps"]:
-            self.assertTrue(isinstance(app["app_id"], int))
-            self.assertTrue(isinstance(app["containers_per"], dict))
-            self.assertTrue(isinstance(app["app_name"], unicode))
-            self.assertTrue(isinstance(app["devices"], list))
-            self.assertTrue(isinstance(app["docker_image"], unicode))
-            self.assertTrue(isinstance(app["env_vars"], dict))
-            self.assertTrue(isinstance(app["networks"], list))
-            self.assertTrue(isinstance(app["privileged"], bool))
-            self.assertTrue(isinstance(app["rolling_restart"], bool))
-            self.assertTrue(isinstance(app["running"], bool))
-            self.assertTrue(isinstance(app["starting_ports"], list))
-            self.assertTrue(isinstance(app["volumes"], list))
+        for app_reply in reply["reply"]["apps"]:
+            self.assertTrue(isinstance(app_reply["app_id"], int))
+            self.assertTrue(isinstance(app_reply["containers_per"], dict))
+            self.assertTrue(isinstance(app_reply["app_name"], unicode))
+            self.assertTrue(isinstance(app_reply["devices"], list))
+            self.assertTrue(isinstance(app_reply["docker_image"], unicode))
+            self.assertTrue(isinstance(app_reply["env_vars"], dict))
+            self.assertTrue(isinstance(app_reply["networks"], list))
+            self.assertTrue(isinstance(app_reply["privileged"], bool))
+            self.assertTrue(isinstance(app_reply["rolling_restart"], bool))
+            self.assertTrue(isinstance(app_reply["running"], bool))
+            self.assertTrue(isinstance(app_reply["starting_ports"], list))
+            self.assertTrue(isinstance(app_reply["volumes"], list))
 
         # check prune device_group images works
         reply = nebula_connection_object.prune__device_group_images(device_group)
@@ -198,10 +198,17 @@ class BaseTests(TestCase):
         self.assertTrue(isinstance(reply["reply"]["apps"], list))
 
         # check device_group already exists works
+        device_group_config = {"apps": [app]}
+        reply = nebula_connection_object.create_device_group(device_group, device_group_config)
+        self.assertEqual(reply["status_code"], 403)
 
         # check delete device_group works
+        reply = nebula_connection_object.delete_device_group(device_group)
+        self.assertEqual(reply["status_code"], 200)
+        self.assertEqual(reply["reply"], {})
 
         # clean up app created for the unit test
+        nebula_connection_object.delete_app(app)
 
     def test_list_device_groups(self):
         nebula_connection_object = nebula_connection()

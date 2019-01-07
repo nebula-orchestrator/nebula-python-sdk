@@ -4,4 +4,4 @@ python:
 install:
   - pip install -r requirements.txt
 script:
-  - python tests.py
+  - python -m unittest discover -s test -p test_nebula_python_sdk.py -t test
