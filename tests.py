@@ -44,8 +44,10 @@ class BaseTests(TestCase):
 
     def test_app_flow(self, app="unit_test_app"):
         nebula_connection_object = nebula_connection()
-        # make sure app does not exist before the check starts
+
+        # make sure app does not exist before the unit test runs
         nebula_connection_object.delete_app(app)
+
         # check app creation works
         reply = create_temp_app(nebula_connection_object, app)
         self.assertEqual(reply["status_code"], 200)
@@ -61,6 +63,7 @@ class BaseTests(TestCase):
         self.assertTrue(reply["reply"]["running"])
         self.assertEqual(reply["reply"]["starting_ports"], [80])
         self.assertEqual(reply["reply"]["volumes"], [])
+
         # check app info works
         reply = nebula_connection_object.list_app_info(app)
         self.assertEqual(reply["status_code"], 200)
@@ -76,32 +79,39 @@ class BaseTests(TestCase):
         self.assertTrue(reply["reply"]["running"])
         self.assertEqual(reply["reply"]["starting_ports"], [80])
         self.assertEqual(reply["reply"]["volumes"], [])
+
         # check that the reply in the case of trying to reuse an existing app name works
         reply = create_temp_app(nebula_connection_object, app)
         self.assertEqual(reply["status_code"], 403)
+
         # check app stop works
         reply = nebula_connection_object.stop_app(app)
         self.assertEqual(reply["status_code"], 202)
         self.assertFalse(reply["reply"]["running"])
         self.assertEqual(reply["reply"]["app_id"], 2)
+
         # check app start works
         reply = nebula_connection_object.start_app(app)
         self.assertEqual(reply["status_code"], 202)
         self.assertTrue(reply["reply"]["running"])
         self.assertEqual(reply["reply"]["app_id"], 3)
+
         # check app restart works
         reply = nebula_connection_object.restart_app(app)
         self.assertEqual(reply["status_code"], 202)
         self.assertEqual(reply["reply"]["app_id"], 4)
+
         # check app update works
         reply = nebula_connection_object.update_app(app, {"docker_image": "httpd:alpine"})
         self.assertEqual(reply["status_code"], 202)
         self.assertEqual(reply["reply"]["app_id"], 5)
         self.assertEqual(reply["reply"]["docker_image"], "httpd:alpine")
+
         # check app deletion works
         reply = nebula_connection_object.delete_app(app)
         self.assertEqual(reply["status_code"], 200)
         self.assertEqual(reply["reply"], {})
+
         # check app creation failure with missing params
         reply = nebula_connection_object.create_app(app, {})
         self.assertEqual(reply["status_code"], 400)
@@ -130,18 +140,28 @@ class BaseTests(TestCase):
         self.assertEqual(reply["status_code"], 202)
         self.assertTrue(isinstance(reply["reply"]["prune_ids"], dict))
 
-    def test_prune_device_group_images(self, device_group="test"):
-        # TODO - move to device_group_flow
+    def test_device_group_flow(self, device_group="unit_test_device_group", app="unit_test_device_group_app"):
         nebula_connection_object = nebula_connection()
-        reply = nebula_connection_object.prune__device_group_images(device_group)
-        first_prune_id = reply["reply"]["prune_id"]
-        reply = nebula_connection_object.prune__device_group_images(device_group)
-        self.assertEqual(reply["status_code"], 202)
-        self.assertEqual(reply["reply"]["prune_id"], first_prune_id + 1)
 
-    def test_list_device_group_info(self, device_group="test"):
-        # TODO - move to device_group_flow
-        nebula_connection_object = nebula_connection()
+        # make sure app & device group don't exist before the unit test runs
+        nebula_connection_object.delete_app(app)
+        nebula_connection_object.delete_device_group(device_group)
+
+        # create app that will be part of the device group
+        create_temp_app(nebula_connection_object, app)
+
+        # check device_group creation works
+        device_group_config ={"apps": [app]}
+        nebula_connection_object.create_device_group(device_group,device_group_config)
+
+        # check list device_group works
+        reply = nebula_connection_object.list_device_group(device_group)
+        self.assertEqual(reply["status_code"], 200)
+        self.assertTrue(reply["reply"]["device_group_id"], 1)
+        self.assertTrue(reply["reply"]["apps"], [app])
+        self.assertEqual(reply["reply"]["prune_id"], 1)
+
+        # check device_group_info works
         reply = nebula_connection_object.list_device_group_info(device_group)
         self.assertEqual(reply["status_code"], 200)
         self.assertTrue(isinstance(reply["reply"]["prune_id"], int))
@@ -160,32 +180,26 @@ class BaseTests(TestCase):
             self.assertTrue(isinstance(app["starting_ports"], list))
             self.assertTrue(isinstance(app["volumes"], list))
 
-    def test_list_device_group(self, device_group="test"):
-        # TODO - move to device_group_flow
-        nebula_connection_object = nebula_connection()
-        reply = nebula_connection_object.list_device_group(device_group)
-        self.assertEqual(reply["status_code"], 200)
-        self.assertTrue(isinstance(reply["reply"]["device_group_id"], int))
-        self.assertTrue(isinstance(reply["reply"]["apps"], list))
-        self.assertEqual(reply["reply"]["device_group"], device_group)
+        # check prune device_group images works
+        reply = nebula_connection_object.prune__device_group_images(device_group)
+        first_prune_id = reply["reply"]["prune_id"]
+        reply = nebula_connection_object.prune__device_group_images(device_group)
+        self.assertEqual(reply["status_code"], 202)
+        self.assertEqual(reply["reply"]["prune_id"], first_prune_id + 1)
+
+        # check update device_group works
+
+        # check device_group already exists works
+
+        # check delete device_group works
+
+        # clean up app created for the unit test
 
     def test_list_device_groups(self):
         nebula_connection_object = nebula_connection()
         reply = nebula_connection_object.list_device_groups()
         self.assertEqual(reply["status_code"], 200)
         self.assertTrue(isinstance(reply["reply"]["device_groups"], list))
-
-    def test_create_device_group_success(self):
-        # TODO - move to device_group_flow
-        pass
-
-    def test_create_device_group_already_exists(self):
-        # TODO - move to device_group_flow
-        pass
-
-    def test_delete_device_group_success(self):
-        # TODO - move to device_group_flow
-        pass
 
     def test_delete_device_group_does_not_exists(self, device_group="test_non_existing_group"):
         nebula_connection_object = nebula_connection()
@@ -195,7 +209,3 @@ class BaseTests(TestCase):
         reply = nebula_connection_object.delete_device_group(device_group)
         self.assertEqual(reply["status_code"], 403)
         self.assertFalse(reply["reply"]["device_group_exists"])
-
-    def test_update_device_group(self):
-        # TODO - move to device_group_flow
-        pass
