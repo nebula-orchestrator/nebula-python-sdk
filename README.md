@@ -52,11 +52,14 @@ app_conf = {
 connection.create_app("app_name", app_conf)
 
 # create device group
-# TODO - add example of create a device_group
+device_group_config = {"apps": ["app_name"]}
+connection.create_device_group("device_group_name", device_group_config)
+
+# list device group
+connection.list_device_group("device_group_name")
 
 # list device group info
-# TODO - add example of listing a device group info
-
+connection.list_device_group_info("device_group_name")
 
 ```
 
