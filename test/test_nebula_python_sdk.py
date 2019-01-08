@@ -170,6 +170,7 @@ class BaseTests(TestCase):
         self.assertEqual(reply["status_code"], 200)
         self.assertTrue(isinstance(reply["reply"]["prune_id"], int))
         self.assertTrue(isinstance(reply["reply"]["device_group_id"], int))
+        self.assertTrue(isinstance(reply["reply"]["apps_list"], list))
         for app_reply in reply["reply"]["apps"]:
             self.assertTrue(isinstance(app_reply["app_id"], int))
             self.assertTrue(isinstance(app_reply["containers_per"], dict))
