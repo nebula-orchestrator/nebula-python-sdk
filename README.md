@@ -62,5 +62,3 @@ connection.list_device_group("device_group_name")
 connection.list_device_group_info("device_group_name")
 
 ```
-
-Note that the response returned is a requests formatted response.
