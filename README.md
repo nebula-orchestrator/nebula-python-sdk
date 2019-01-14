@@ -3,6 +3,8 @@ An SDK for managing [nebula](https://nebula-orchestrator.github.io/) via python.
 
 translates all of Nebula [API](http://nebula.readthedocs.io/en/latest/api/) calls to something more pythonic.
 
+Source code is available at [github](https://github.com/nebula-orchestrator/nebula-python-sdk)
+
 # How To Use
 first get NebulaPythonSDK onto your machine
 ```bash
@@ -35,6 +37,7 @@ app_conf = {
     "docker_ulimits": [],
     "networks": ["nebula"],
     "running": True,
+    "rolling_restart": False,
     "volumes": ["/tmp:/tmp/1", "/var/tmp/:/var/tmp/1:ro"],
     "containers_per": {
         "cpu": 6
@@ -50,6 +53,44 @@ app_conf = {
 }
 connection.create_app("app_name", app_conf)
 
-```
+# create device group
+device_group_config = {"apps": ["app_name"]}
+connection.create_device_group("device_group_name", device_group_config)
 
-Note that the response returned is a requests formatted response.
+# list device group
+connection.list_device_group("device_group_name")
+
+# list device group info
+connection.list_device_group_info("device_group_name")
+
+# ping api
+connection.check_api()
+
+# delete app
+connection.delete_app("app_name")
+
+# stop app
+connection.stop_app("app_name")
+
+# start app
+connection.start_app("app_name")
+
+# restart app
+connection.restart_app("app_name")
+
+# update app
+connection.update_app("app_name", app_conf)
+
+# prune images on all device groups
+connection.prune_images()
+
+# delete device_group
+connection.delete_device_group("device_group_name")
+
+# prune images on a selected device groups
+connection.prune__device_group_images("device_group_name")
+
+# update device group
+connection.update_device_group("device_group_name", device_group_config)
+
+```
