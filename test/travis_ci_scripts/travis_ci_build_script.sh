@@ -9,3 +9,5 @@ until $(curl --output /dev/null --silent --head --fail -H 'authorization: Basic 
     echo "Waiting on the manager API to become available..."
     sleep 3
 done
+
+echo "manager available"

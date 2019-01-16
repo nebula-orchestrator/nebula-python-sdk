@@ -6,12 +6,12 @@ from NebulaPythonSDK import Nebula
 # the following unit tests require a working nebula manager to test against and having the envvars in the
 # nebula_connection function declared if not using the default values
 def nebula_connection():
-    nebula_user = os.getenv("USER", "nebula")
-    nebula_password = os.getenv("PASSWORD", "nebula")
-    nebula_hostname = os.getenv("HOST", "127.0.0.1")
-    nebula_port = int(os.getenv("PORT", "80"))
-    nebula_protocol = os.getenv("PROTOCOL", "http")
-    nebula_request_timeout = int(os.getenv("REQUEST_TIMEOUT", "60"))
+    nebula_user = os.getenv("NEBULA_TEST_USERNAME", "nebula")
+    nebula_password = os.getenv("NEBULA_TEST_PASSWORD", "nebula")
+    nebula_hostname = os.getenv("NEBULA_TEST_HOST", "127.0.0.1")
+    nebula_port = int(os.getenv("NEBULA_TEST_PORT", "80"))
+    nebula_protocol = os.getenv("NEBULA_TEST_PROTOCOL", "http")
+    nebula_request_timeout = int(os.getenv("NEBULA_TEST_REQUEST_TIMEOUT", "60"))
     connection = Nebula(username=nebula_user, password=nebula_password, host=nebula_hostname, port=nebula_port,
                         protocol=nebula_protocol, request_timeout=nebula_request_timeout)
     return connection
