@@ -115,7 +115,9 @@ class BaseTests(TestCase):
         # check app creation failure with missing params
         reply = nebula_connection_object.create_app(app, {})
         self.assertEqual(reply["status_code"], 400)
-        self.assertTrue(isinstance(reply["reply"]["missing_parameters"], list))
+        expected_reply = ['volumes', 'env_vars', 'devices', 'networks', 'running', 'containers_per', 'starting_ports',
+                          'rolling_restart', 'privileged', 'docker_image']
+        self.assertTrue(reply["reply"]["missing_parameters"], expected_reply)
 
     def test_delete_app_does_not_exist(self, app="test_app_which_does_not_exist"):
         nebula_connection_object = nebula_connection()
@@ -138,7 +140,7 @@ class BaseTests(TestCase):
         nebula_connection_object = nebula_connection()
         reply = nebula_connection_object.prune_images()
         self.assertEqual(reply["status_code"], 202)
-        self.assertTrue(isinstance(reply["reply"]["prune_ids"], dict))
+        self.assertTrue(reply["reply"]["prune_ids"], 3)
 
     def test_device_group_flow(self, device_group="unit_test_device_group", app="unit_test_device_group_app"):
         nebula_connection_object = nebula_connection()
@@ -168,9 +170,9 @@ class BaseTests(TestCase):
         # check device_group_info works
         reply = nebula_connection_object.list_device_group_info(device_group)
         self.assertEqual(reply["status_code"], 200)
-        self.assertTrue(isinstance(reply["reply"]["prune_id"], int))
-        self.assertTrue(isinstance(reply["reply"]["device_group_id"], int))
-        self.assertTrue(isinstance(reply["reply"]["apps_list"], list))
+        self.assertTrue(reply["reply"]["prune_id"], 1)
+        self.assertTrue(reply["reply"]["device_group_id"], 1)
+        self.assertTrue(reply["reply"]["apps_list"], ['unit_test_device_group_app'])
         for app_reply in reply["reply"]["apps"]:
             self.assertTrue(isinstance(app_reply["app_id"], int))
             self.assertTrue(isinstance(app_reply["containers_per"], dict))
@@ -196,7 +198,7 @@ class BaseTests(TestCase):
         reply = nebula_connection_object.update_device_group(device_group, {"apps": []})
         self.assertEqual(reply["status_code"], 202)
         self.assertTrue(reply["reply"]["device_group_id"], 2)
-        self.assertTrue(isinstance(reply["reply"]["apps"], list))
+        self.assertTrue((reply["reply"]["apps"], list))
 
         # check device_group already exists works
         device_group_config = {"apps": [app]}
@@ -215,7 +217,7 @@ class BaseTests(TestCase):
         nebula_connection_object = nebula_connection()
         reply = nebula_connection_object.list_device_groups()
         self.assertEqual(reply["status_code"], 200)
-        self.assertTrue(isinstance(reply["reply"]["device_groups"], list))
+        self.assertTrue(reply["reply"]["device_groups"], [u'example'])
 
     def test_delete_device_group_does_not_exists(self, device_group="test_non_existing_group"):
         nebula_connection_object = nebula_connection()
