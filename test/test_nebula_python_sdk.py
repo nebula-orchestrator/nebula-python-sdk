@@ -217,7 +217,7 @@ class BaseTests(TestCase):
         nebula_connection_object = nebula_connection()
         reply = nebula_connection_object.list_device_groups()
         self.assertEqual(reply["status_code"], 200)
-        self.assertTrue(reply["reply"]["device_groups"], [u'example'])
+        self.assertTrue(reply["reply"]["device_groups"], ['example'])
 
     def test_delete_device_group_does_not_exists(self, device_group="test_non_existing_group"):
         nebula_connection_object = nebula_connection()
