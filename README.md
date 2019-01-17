@@ -1,4 +1,7 @@
 # Nebula-Python-SDK
+
+[![Build Status](https://travis-ci.org/nebula-orchestrator/nebula-python-sdk.svg?branch=master)](https://travis-ci.org/nebula-orchestrator/nebula-python-sdk)
+
 An SDK for managing [nebula](https://nebula-orchestrator.github.io/) via python.
 
 translates all of Nebula [API](http://nebula.readthedocs.io/en/latest/api/) calls to something more pythonic.
