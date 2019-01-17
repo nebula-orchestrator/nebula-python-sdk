@@ -140,7 +140,7 @@ class BaseTests(TestCase):
         nebula_connection_object = nebula_connection()
         reply = nebula_connection_object.prune_images()
         self.assertEqual(reply["status_code"], 202)
-        self.assertEqual(reply["reply"]["prune_ids"], 3)
+        self.assertTrue(isinstance(reply["reply"]["prune_ids"], dict))
 
     def test_device_group_flow(self, device_group="unit_test_device_group", app="unit_test_device_group_app"):
         nebula_connection_object = nebula_connection()
@@ -217,7 +217,7 @@ class BaseTests(TestCase):
         nebula_connection_object = nebula_connection()
         reply = nebula_connection_object.list_device_groups()
         self.assertEqual(reply["status_code"], 200)
-        self.assertEqual(reply["reply"]["device_groups"], ['example'])
+        self.assertTrue(isinstance(reply["reply"]["device_groups"], list))
 
     def test_delete_device_group_does_not_exists(self, device_group="test_non_existing_group"):
         nebula_connection_object = nebula_connection()
