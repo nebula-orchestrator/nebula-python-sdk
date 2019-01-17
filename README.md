@@ -1,6 +1,6 @@
 # Nebula-Python-SDK
 
-[![Build Status](https://travis-ci.org/nebula-orchestrator/nebula-python-sdk.svg?branch=master)](https://travis-ci.org/nebula-orchestrator/nebula-python-sdk)
+Travis CI unit tests & auto PyPi push status: [![Build Status](https://travis-ci.org/nebula-orchestrator/nebula-python-sdk.svg?branch=master)](https://travis-ci.org/nebula-orchestrator/nebula-python-sdk)
 
 An SDK for managing [nebula](https://nebula-orchestrator.github.io/) via python.
 
