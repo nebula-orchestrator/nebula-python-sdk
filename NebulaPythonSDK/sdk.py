@@ -26,7 +26,7 @@ class Nebula:
             if six.PY3 is True:
                 user_pass_combo = user_pass_combo.encode('utf-8')
             self.basic_auth = base64.b64encode(user_pass_combo)
-            self.headers["authorization"] = "Basic " + self.basic_auth
+            self.headers["authorization"] = "Basic " + self.basic_auth.decode('utf-8')
         self.API_VERSION = "v2"
 
     # create a new nebula app, requires the app name to create and a complete dict of the config values for it

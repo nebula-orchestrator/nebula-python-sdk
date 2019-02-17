@@ -134,7 +134,7 @@ class BaseTests(TestCase):
         self.assertEqual(reply["status_code"], 200)
         self.assertTrue(isinstance(app_list, list))
         for app in app_list:
-            self.assertTrue(isinstance(app, unicode))
+            self.assertTrue(isinstance(app, str))
 
     def test_prune_images(self):
         nebula_connection_object = nebula_connection()
@@ -176,9 +176,9 @@ class BaseTests(TestCase):
         for app_reply in reply["reply"]["apps"]:
             self.assertTrue(isinstance(app_reply["app_id"], int))
             self.assertTrue(isinstance(app_reply["containers_per"], dict))
-            self.assertTrue(isinstance(app_reply["app_name"], unicode))
+            self.assertTrue(isinstance(app_reply["app_name"], str))
             self.assertTrue(isinstance(app_reply["devices"], list))
-            self.assertTrue(isinstance(app_reply["docker_image"], unicode))
+            self.assertTrue(isinstance(app_reply["docker_image"], str))
             self.assertTrue(isinstance(app_reply["env_vars"], dict))
             self.assertTrue(isinstance(app_reply["networks"], list))
             self.assertTrue(isinstance(app_reply["privileged"], bool))
