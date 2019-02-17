@@ -1,4 +1,9 @@
-import requests, base64, json
+import requests, base64, json, six
+
+def b64encode(source):
+    if six.PY3:
+        source = source.encode('utf-8')
+    content = base64.b64encode(source).decode('utf-8')
 
 
 class Nebula:
@@ -17,7 +22,10 @@ class Nebula:
             'cache-control': "no-cache"
         }
         if username is not None and password is not None:
-            self.basic_auth = base64.b64encode(username + ":" + password)
+            user_pass_combo = username + ":" + password
+            if six.PY3 is True:
+                user_pass_combo = user_pass_combo.encode('utf-8')
+            self.basic_auth = base64.b64encode(user_pass_combo)
             self.headers["authorization"] = "Basic " + self.basic_auth
         self.API_VERSION = "v2"
 
