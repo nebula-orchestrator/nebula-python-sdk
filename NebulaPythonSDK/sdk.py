@@ -170,3 +170,20 @@ class Nebula:
         response = requests.request("POST", url, data=payload, headers=headers, timeout=self.request_timeout)
         filtered_response = {"status_code": response.status_code, "reply": response.json()}
         return filtered_response
+
+    # list device_group configuration
+    def list_reports(self, page_size=10, hostname=None, device_group=None, report_creation_time_filter="gt",
+                     report_creation_time=None, last_id=None):
+        url = self.host + "/api/" + self.API_VERSION + "/reports"
+        headers = self.headers
+        querystring = {
+            "page_size": page_size,
+            "hostname": hostname,
+            "device_group": device_group,
+            "report_creation_time_filter": report_creation_time_filter,
+            "report_creation_time": report_creation_time,
+            "last_id": last_id
+        }
+        response = requests.request("GET", url, headers=headers, timeout=self.request_timeout, params=querystring)
+        filtered_response = {"status_code": response.status_code, "reply": response.json()}
+        return filtered_response
