@@ -1,8 +1,9 @@
+from setuptools import setup, find_packages
+import os
+
 __author__ = 'Naor Livne'
 __author_email__ = 'naorlivne@gmail.com'
-__version__ = '2.2.0'
-
-from setuptools import setup, find_packages
+__version__ = os.getenv("TRAVIS_BRANCH")
 
 with open('README.md') as f:
     long_description = f.read()
