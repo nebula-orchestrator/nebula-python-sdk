@@ -10,10 +10,12 @@ class Nebula:
 
     # the nebula class init module serves as the login against the nebula API as it's the only shared thing among the
     # class functions
-    def __init__(self, username=None, password=None, host="127.0.0.1", port=80, protocol="http", request_timeout=60):
+    def __init__(self, username=None, password=None, token=None, host="127.0.0.1", port=80, protocol="http",
+                 request_timeout=60):
         self.request_timeout = request_timeout
         self.username = username
         self.password = password
+        self.token = token
         self.protocol = protocol
         self.port = port
         self.host = protocol + "://" + host + ":" + str(port)
@@ -21,7 +23,9 @@ class Nebula:
             'content-type': "application/json",
             'cache-control': "no-cache"
         }
-        if username is not None and password is not None:
+        if token is not None:
+            self.headers["authorization"] = "Bearer " + self.token
+        elif username is not None and password is not None:
             user_pass_combo = username + ":" + password
             if six.PY3 is True:
                 user_pass_combo = user_pass_combo.encode('utf-8')
