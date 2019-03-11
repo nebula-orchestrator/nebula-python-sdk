@@ -237,3 +237,18 @@ class BaseTests(TestCase):
         self.assertEqual(reply["status_code"], 200)
         self.assertEqual(reply["reply"]["data"], None)
         self.assertEqual(reply["reply"]["last_id"], None)
+
+    # TODO - create unit tests for the user flow
+
+    # TODO - list users
+
+    # TODO - get user info
+
+    # TODO - delete a user
+
+    # TODO -  update a user
+
+    # TODO - refresh a user token
+
+    # TODO - create new user
+

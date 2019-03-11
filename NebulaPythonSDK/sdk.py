@@ -191,3 +191,17 @@ class Nebula:
         response = requests.request("GET", url, headers=headers, timeout=self.request_timeout, params=querystring)
         filtered_response = {"status_code": response.status_code, "reply": response.json()}
         return filtered_response
+
+    # TODO - list users
+
+    # TODO - get user info
+
+    # TODO - delete a user
+
+    # TODO -  update a user
+
+    # TODO - refresh a user token
+
+    # TODO - create new user
+
+
