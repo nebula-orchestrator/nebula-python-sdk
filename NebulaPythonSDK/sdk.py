@@ -148,8 +148,7 @@ class Nebula:
         filtered_response = {"status_code": response.status_code, "reply": response.json()}
         return filtered_response
 
-    # create a new nebula delete_device_group, requires the app name to create and a complete dict of the config values
-    # for it
+    # create a new nebula device_group, requires the app name to create and a complete dict of the config values for it
     def create_device_group(self, device_group, config):
         url = self.host + "/api/" + self.API_VERSION + "/device_groups/" + device_group
         payload = json.dumps(config)
@@ -158,7 +157,7 @@ class Nebula:
         filtered_response = {"status_code": response.status_code, "reply": response.json()}
         return filtered_response
 
-    # delete an existing nebula delete_device_group, no confirmation required in SDK so be careful
+    # delete an existing nebula device_group, no confirmation required in SDK so be careful
     def delete_device_group(self, device_group):
         url = self.host + "/api/" + self.API_VERSION + "/device_groups/" + device_group
         headers = self.headers
@@ -192,16 +191,52 @@ class Nebula:
         filtered_response = {"status_code": response.status_code, "reply": response.json()}
         return filtered_response
 
-    # TODO - list users
+    # list all users
+    def list_users(self):
+        url = self.host + "/api/" + self.API_VERSION + "/users"
+        headers = self.headers
+        response = requests.request("GET", url, headers=headers, timeout=self.request_timeout)
+        filtered_response = {"status_code": response.status_code, "reply": response.json()}
+        return filtered_response
 
-    # TODO - get user info
+    # list a user configuration
+    def list_user(self, user):
+        url = self.host + "/api/" + self.API_VERSION + "/users/" + user
+        headers = self.headers
+        response = requests.request("GET", url, headers=headers, timeout=self.request_timeout)
+        filtered_response = {"status_code": response.status_code, "reply": response.json()}
+        return filtered_response
 
-    # TODO - delete a user
+    # delete an existing nebula user, no confirmation required in SDK so be careful
+    def delete_user(self, user):
+        url = self.host + "/api/" + self.API_VERSION + "/users/" + user
+        headers = self.headers
+        response = requests.request("DELETE", url, headers=headers, timeout=self.request_timeout)
+        filtered_response = {"status_code": response.status_code, "reply": response.json()}
+        return filtered_response
 
-    # TODO -  update a user
+    # update a user pass and\or bearer token
+    def update_user(self, user, config):
+        url = self.host + "/api/" + self.API_VERSION + "/users/" + user + "/update"
+        payload = json.dumps(config)
+        headers = self.headers
+        response = requests.request("PUT", url, data=payload, headers=headers, timeout=self.request_timeout)
+        filtered_response = {"status_code": response.status_code, "reply": response.json()}
+        return filtered_response
 
-    # TODO - refresh a user token
+    # refresh a token for a user
+    def refresh_user_token(self, user):
+        url = self.host + "/api/" + self.API_VERSION + "/users/" + user + "/refresh"
+        headers = self.headers
+        response = requests.request("POST", url, headers=headers, timeout=self.request_timeout)
+        filtered_response = {"status_code": response.status_code, "reply": response.json()}
+        return filtered_response
 
-    # TODO - create new user
-
-
+    # create a new nebula user, requires the user name to create and a complete dict of the config values for it
+    def create_user(self, user, config):
+        url = self.host + "/api/" + self.API_VERSION + "/users/" + user
+        payload = json.dumps(config)
+        headers = self.headers
+        response = requests.request("POST", url, data=payload, headers=headers, timeout=self.request_timeout)
+        filtered_response = {"status_code": response.status_code, "reply": response.json()}
+        return filtered_response

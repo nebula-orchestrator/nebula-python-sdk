@@ -238,17 +238,50 @@ class BaseTests(TestCase):
         self.assertEqual(reply["reply"]["data"], None)
         self.assertEqual(reply["reply"]["last_id"], None)
 
-    # TODO - create unit tests for the user flow
+    def test_list_users(self):
+        nebula_connection_object = nebula_connection()
+        reply = nebula_connection_object.list_users()
+        self.assertEqual(reply["status_code"], 200)
+        self.assertTrue(isinstance(reply["reply"]["users"], list))
 
-    # TODO - list users
+    def test_user_workflow(self, user="unit_test_user"):
+        nebula_connection_object = nebula_connection()
 
-    # TODO - get user info
+        # make sure no user exists prior to the run
+        nebula_connection_object.delete_user(user)
 
-    # TODO - delete a user
+        # check creating a user
+        user_config = {"password": "unit_test_password", "token": "unit_test_token"}
+        reply = nebula_connection_object.create_user(user, user_config)
+        self.assertEqual(reply["status_code"], 200)
+        self.assertTrue(isinstance(reply["reply"]["password"], str))
+        self.assertTrue(isinstance(reply["reply"]["token"], str))
 
-    # TODO -  update a user
+        # check getting user info
+        reply = nebula_connection_object.list_user(user)
+        self.assertEqual(reply["status_code"], 200)
+        self.assertEqual(reply["reply"]["user_name"], user)
+        self.assertTrue(isinstance(reply["reply"]["password"], str))
+        self.assertTrue(isinstance(reply["reply"]["token"], str))
 
-    # TODO - refresh a user token
+        #check updating a user
+        user_config = {"password": "unit_test_password_updated", "token": "unit_test_token_updated"}
+        reply = nebula_connection_object.update_user(user, user_config)
+        self.assertEqual(reply["status_code"], 200)
+        self.assertEqual(reply["reply"]["user_name"], user)
+        self.assertTrue(isinstance(reply["reply"]["password"], str))
+        self.assertTrue(isinstance(reply["reply"]["token"], str))
+        user_config = {"password": "unit_test_password", "token": "unit_test_token"}
+        reply_second = nebula_connection_object.update_user(user, user_config)
+        self.assertNotEqual(reply["reply"]["password"], reply_second["reply"]["password"])
+        self.assertNotEqual(reply["reply"]["token"], reply_second["reply"]["token"])
 
-    # TODO - create new user
+        # check refreshing a user token
+        reply = nebula_connection_object.refresh_user_token(user)
+        self.assertEqual(reply["status_code"], 200)
+        self.assertTrue(isinstance(reply["reply"]["token"], str))
 
+        # check deleting a user
+        reply = nebula_connection_object.delete_user(user)
+        self.assertEqual(reply["status_code"], 200)
+        self.assertEqual(reply["reply"], {})
