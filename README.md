@@ -147,4 +147,5 @@ connection.update_user_group("user_group_name", user_group_config)
 
 # delete a user group
 connection.delete_user_group("user_group_name")
+
 ```
