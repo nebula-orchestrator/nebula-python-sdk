@@ -285,3 +285,63 @@ class BaseTests(TestCase):
         reply = nebula_connection_object.delete_user(user)
         self.assertEqual(reply["status_code"], 200)
         self.assertEqual(reply["reply"], {})
+
+    def test_user_group_workflow(self, user="unit_test_user", user_group="unit_test_user_group",
+                                 app="unit_test_device_group_app"):
+        nebula_connection_object = nebula_connection()
+
+        # make sure no user & user group exists prior to the run
+        nebula_connection_object.delete_user(user)
+        nebula_connection_object.delete_user_group(user_group)
+        nebula_connection_object.delete_app(app)
+
+        # creating a user that will be used in the tests
+        user_config = {"password": "unit_test_password", "token": "unit_test_token"}
+        nebula_connection_object.create_user(user, user_config)
+
+        # creating a app that will be used in the tests
+        create_temp_app(nebula_connection_object, app)
+
+        # check creating a user group
+        user_group_config = {
+            "group_members": [user],
+            "pruning_allowed": True,
+            "apps": {app: "rw"},
+            "device_groups": {},
+            "admin": False
+        }
+
+        reply = nebula_connection_object.create_user_group(user_group, user_group_config)
+        self.assertEqual(reply["status_code"], 200)
+        self.assertEqual(reply["reply"]["user_group"], user_group)
+        self.assertEqual(reply["reply"]["group_members"], [user])
+        self.assertTrue(reply["reply"]["pruning_allowed"])
+        self.assertEqual(reply["reply"]["apps"], {app: "rw"})
+        self.assertEqual(reply["reply"]["device_groups"], {})
+        self.assertFalse(reply["reply"]["admin"])
+
+        # check getting user group info
+        reply = nebula_connection_object.list_user_group(user_group)
+        self.assertEqual(reply["status_code"], 200)
+        self.assertEqual(reply["reply"]["user_group"], user_group)
+        self.assertEqual(reply["reply"]["group_members"], [user])
+        self.assertTrue(reply["reply"]["pruning_allowed"])
+        self.assertEqual(reply["reply"]["apps"], {app: "rw"})
+        self.assertEqual(reply["reply"]["device_groups"], {})
+        self.assertFalse(reply["reply"]["admin"])
+
+        # check updating a user group
+        user_group_config = {"admin": True}
+        reply = nebula_connection_object.update_user_group(user_group, user_group_config)
+        self.assertEqual(reply["status_code"], 200)
+        self.assertEqual(reply["reply"]["user_group"], user_group)
+        self.assertEqual(reply["reply"]["group_members"], [user])
+        self.assertTrue(reply["reply"]["pruning_allowed"])
+        self.assertEqual(reply["reply"]["apps"], {app: "rw"})
+        self.assertEqual(reply["reply"]["device_groups"], {})
+        self.assertTrue(reply["reply"]["admin"])
+
+        # check deleting a user group
+        reply = nebula_connection_object.delete_user_group(user_group)
+        self.assertEqual(reply["status_code"], 200)
+        self.assertEqual(reply["reply"], {})

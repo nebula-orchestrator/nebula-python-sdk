@@ -240,3 +240,45 @@ class Nebula:
         response = requests.request("POST", url, data=payload, headers=headers, timeout=self.request_timeout)
         filtered_response = {"status_code": response.status_code, "reply": response.json()}
         return filtered_response
+
+    # list all user groups
+    def list_user_groups(self):
+        url = self.host + "/api/" + self.API_VERSION + "/user_groups"
+        headers = self.headers
+        response = requests.request("GET", url, headers=headers, timeout=self.request_timeout)
+        filtered_response = {"status_code": response.status_code, "reply": response.json()}
+        return filtered_response
+
+    # list a user group configuration
+    def list_user_group(self, user):
+        url = self.host + "/api/" + self.API_VERSION + "/user_groups/" + user
+        headers = self.headers
+        response = requests.request("GET", url, headers=headers, timeout=self.request_timeout)
+        filtered_response = {"status_code": response.status_code, "reply": response.json()}
+        return filtered_response
+
+    # delete an existing nebula user group, no confirmation required in SDK so be careful
+    def delete_user_group(self, user):
+        url = self.host + "/api/" + self.API_VERSION + "/user_groups/" + user
+        headers = self.headers
+        response = requests.request("DELETE", url, headers=headers, timeout=self.request_timeout)
+        filtered_response = {"status_code": response.status_code, "reply": response.json()}
+        return filtered_response
+
+    # update a user group
+    def update_user_group(self, user, config):
+        url = self.host + "/api/" + self.API_VERSION + "/user_groups/" + user + "/update"
+        payload = json.dumps(config)
+        headers = self.headers
+        response = requests.request("PUT", url, data=payload, headers=headers, timeout=self.request_timeout)
+        filtered_response = {"status_code": response.status_code, "reply": response.json()}
+        return filtered_response
+
+    # create a new nebula user group, requires the group name to create and a complete dict of the config values for it
+    def create_user_group(self, user, config):
+        url = self.host + "/api/" + self.API_VERSION + "/user_groups/" + user
+        payload = json.dumps(config)
+        headers = self.headers
+        response = requests.request("POST", url, data=payload, headers=headers, timeout=self.request_timeout)
+        filtered_response = {"status_code": response.status_code, "reply": response.json()}
+        return filtered_response
