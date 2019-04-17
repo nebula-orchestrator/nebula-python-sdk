@@ -165,12 +165,12 @@ class Nebula:
         filtered_response = {"status_code": response.status_code, "reply": response.json()}
         return filtered_response
 
-    # update apps in a device group
+    # update a device group
     def update_device_group(self, device_group, config):
         url = self.host + "/api/" + self.API_VERSION + "/device_groups/" + device_group + "/update"
         payload = json.dumps(config)
         headers = self.headers
-        response = requests.request("POST", url, data=payload, headers=headers, timeout=self.request_timeout)
+        response = requests.request("PUT", url, data=payload, headers=headers, timeout=self.request_timeout)
         filtered_response = {"status_code": response.status_code, "reply": response.json()}
         return filtered_response
 
