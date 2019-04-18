@@ -282,3 +282,46 @@ class Nebula:
         response = requests.request("POST", url, data=payload, headers=headers, timeout=self.request_timeout)
         filtered_response = {"status_code": response.status_code, "reply": response.json()}
         return filtered_response
+
+    # list all of the cron_jobs managed by nebula
+    def list_cron_jobs(self):
+        url = self.host + "/api/" + self.API_VERSION + "/cron_jobs"
+        headers = self.headers
+        response = requests.request("GET", url, headers=headers, timeout=self.request_timeout)
+        filtered_response = {"status_code": response.status_code, "reply": response.json()}
+        return filtered_response
+
+    # delete an existing nebula cron_job, no confirmation required in SDK so be careful
+    def delete_cron_job(self, cron_job):
+        url = self.host + "/api/" + self.API_VERSION + "/cron_jobs/" + cron_job
+        headers = self.headers
+        response = requests.request("DELETE", url, headers=headers, timeout=self.request_timeout)
+        filtered_response = {"status_code": response.status_code, "reply": response.json()}
+        return filtered_response
+
+    # list the config of a nebula cron_job, only requires the app name
+    def list_cron_job_info(self, cron_job):
+        url = self.host + "/api/" + self.API_VERSION + "/cron_jobs/" + cron_job
+        headers = self.headers
+        response = requests.request("GET", url, headers=headers, timeout=self.request_timeout)
+        filtered_response = {"status_code": response.status_code, "reply": response.json()}
+        return filtered_response
+
+    # create a new nebula cron_job, requires the cron_job name to create and a complete dict of the config values for it
+    def create_cron_job(self, cron_job, config):
+        url = self.host + "/api/" + self.API_VERSION + "/cron_jobs/" + cron_job
+        payload = json.dumps(config)
+        headers = self.headers
+        response = requests.request("POST", url, data=payload, headers=headers, timeout=self.request_timeout)
+        filtered_response = {"status_code": response.status_code, "reply": response.json()}
+        return filtered_response
+
+    # update a nebula cron_job, requires the cron_job name and a dict of the config values you want to change, any
+    # combination of config values is accepted as it keeps the rest unchanged
+    def update_cron_job(self, cron_job, config):
+        url = self.host + "/api/" + self.API_VERSION + "/cron_jobs/" + cron_job + "/update"
+        payload = json.dumps(config)
+        headers = self.headers
+        response = requests.request("PUT", url, data=payload, headers=headers, timeout=self.request_timeout)
+        filtered_response = {"status_code": response.status_code, "reply": response.json()}
+        return filtered_response

@@ -345,3 +345,75 @@ class BaseTests(TestCase):
         reply = nebula_connection_object.delete_user_group(user_group)
         self.assertEqual(reply["status_code"], 200)
         self.assertEqual(reply["reply"], {})
+
+    def test_list_all_cron_jobs(self):
+        nebula_connection_object = nebula_connection()
+        reply = nebula_connection_object.list_cron_jobs()
+        cron_jobs_list = reply["reply"]["cron_jobs"]
+        self.assertEqual(reply["status_code"], 200)
+        self.assertTrue(isinstance(cron_jobs_list, list))
+        for cron_job in cron_jobs_list:
+            self.assertTrue(isinstance(cron_job, str))
+
+    def test_delete_cron_job_does_not_exist(self, cron_job="cron_job_that_does_not_exist"):
+        nebula_connection_object = nebula_connection()
+        # deleting twice so even if the app does exist prior to running the check it won't on the 2nd run
+        nebula_connection_object.delete_cron_job(cron_job)
+        reply = nebula_connection_object.delete_cron_job(cron_job)
+        self.assertEqual(reply["status_code"], 403)
+        self.assertFalse(reply["reply"]["cron_job_exists"])
+
+    def test_cron_job_flow(self, cron_job="unit_test_cron_job"):
+        nebula_connection_object = nebula_connection()
+        cron_job_config = {
+            "env_vars": {"test": "test123"},
+            "docker_image": "hello-world",
+            "running": True,
+            "volumes": [],
+            "networks": ["nebula", "bridge"],
+            "devices": [],
+            "privileged": False,
+            "schedule": "0 0 * * *"
+        }
+
+        # deleting the cron job to make sure we start from a clean slate
+        nebula_connection_object.delete_cron_job(cron_job)
+
+        # check creating a cron_jon works
+        reply = nebula_connection_object.create_cron_job(cron_job, cron_job_config)
+        self.assertEqual(reply["status_code"], 200)
+        self.assertEqual(reply["reply"]["cron_job_id"], 1)
+        self.assertEqual(reply["reply"]["cron_job_name"], cron_job)
+        self.assertEqual(reply["reply"]["schedule"], cron_job_config["schedule"])
+        self.assertEqual(reply["reply"]["env_vars"], cron_job_config["env_vars"])
+        self.assertEqual(reply["reply"]["docker_image"], cron_job_config["docker_image"])
+        self.assertTrue(reply["reply"]["running"])
+        self.assertEqual(reply["reply"]["networks"], cron_job_config["networks"])
+        self.assertEqual(reply["reply"]["volumes"], cron_job_config["volumes"])
+        self.assertEqual(reply["reply"]["devices"], cron_job_config["devices"])
+        self.assertFalse(reply["reply"]["privileged"])
+
+        # check listing a cron_jon info works
+        reply = nebula_connection_object.list_cron_job_info(cron_job)
+        self.assertEqual(reply["status_code"], 200)
+        self.assertEqual(reply["reply"]["cron_job_id"], 1)
+        self.assertEqual(reply["reply"]["cron_job_name"], cron_job)
+        self.assertEqual(reply["reply"]["schedule"], cron_job_config["schedule"])
+        self.assertEqual(reply["reply"]["env_vars"], cron_job_config["env_vars"])
+        self.assertEqual(reply["reply"]["docker_image"], cron_job_config["docker_image"])
+        self.assertTrue(reply["reply"]["running"])
+        self.assertEqual(reply["reply"]["networks"], cron_job_config["networks"])
+        self.assertEqual(reply["reply"]["volumes"], cron_job_config["volumes"])
+        self.assertEqual(reply["reply"]["devices"], cron_job_config["devices"])
+        self.assertFalse(reply["reply"]["privileged"])
+
+        # check updating a cron_jon works
+        reply = nebula_connection_object.update_cron_job(cron_job, {"schedule": "5 5 * * *"})
+        self.assertEqual(reply["status_code"], 202)
+        self.assertEqual(reply["reply"]["cron_job_id"], 2)
+        self.assertEqual(reply["reply"]["schedule"], "5 5 * * *")
+
+        # check cron_jon deletion works
+        reply = nebula_connection_object.delete_cron_job(cron_job)
+        self.assertEqual(reply["status_code"], 200)
+        self.assertEqual(reply["reply"], {})
