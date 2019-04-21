@@ -264,7 +264,7 @@ class BaseTests(TestCase):
         self.assertTrue(isinstance(reply["reply"]["password"], str))
         self.assertTrue(isinstance(reply["reply"]["token"], str))
 
-        #check updating a user
+        # check updating a user
         user_config = {"password": "unit_test_password_updated", "token": "unit_test_token_updated"}
         reply = nebula_connection_object.update_user(user, user_config)
         self.assertEqual(reply["status_code"], 200)
