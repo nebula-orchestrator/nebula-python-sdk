@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 __author__ = 'Naor Livne'
 __author_email__ = 'naorlivne@gmail.com'
-__version__ = '2.5.0'
+__version__ = '2.5.1'
 
 with open('README.md') as f:
     long_description = f.read()
