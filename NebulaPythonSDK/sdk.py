@@ -1,5 +1,6 @@
 import requests, base64, json, six
 
+
 def b64encode(source):
     if six.PY3:
         source = source.encode('utf-8')
