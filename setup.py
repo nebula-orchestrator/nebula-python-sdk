@@ -7,6 +7,11 @@ __version__ = '2.5.1'
 with open('README.md') as f:
     long_description = f.read()
 
+requirements = [
+    'requests>=2.3.0',
+    'six>=1.12.0'
+]
+
 setup(name='NebulaPythonSDK',
       author=__author__,
       author_email=__author_email__,
@@ -19,7 +24,7 @@ setup(name='NebulaPythonSDK',
       license="GPLv3",
       keywords="nebula container orchestrator sdk",
       url="https://github.com/nebula-orchestrator/nebula-python-sdk",
-      install_requires=['requests>=2.3.0', 'six>=1.12.0'],
+      install_requires=requirements,
       classifiers=["Development Status :: 5 - Production/Stable",
                    "Environment :: Other Environment",
                    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
