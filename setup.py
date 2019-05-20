@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 __author__ = 'Naor Livne'
 __author_email__ = 'naorlivne@gmail.com'
-__version__ = '2.5.1'
+__version__ = '2.5.2'
 
 with open('README.md') as f:
     long_description = f.read()
@@ -21,13 +21,13 @@ setup(name='NebulaPythonSDK',
       long_description_content_type='text/markdown',
       packages=find_packages(exclude=['contrib', 'docs', 'tests']),
       scripts=['setup.py'],
-      license="GPLv3",
+      license="LGPLv3",
       keywords="nebula container orchestrator sdk",
       url="https://github.com/nebula-orchestrator/nebula-python-sdk",
       install_requires=requirements,
       classifiers=["Development Status :: 5 - Production/Stable",
                    "Environment :: Other Environment",
-                   "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+                   "License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)",
                    "Operating System :: OS Independent",
                    "Intended Audience :: Developers",
                    "Intended Audience :: System Administrators",
