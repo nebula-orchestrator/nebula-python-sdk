@@ -9,9 +9,10 @@ services:
   - docker
 install:
   - pip install NebulaPythonSDK
+  - pip install codecov
 script:
   - sudo sh test/travis_ci_scripts/travis_ci_build_script.sh
-  - python -m unittest discover
+  - coverage run -m unittest
 deploy:
   provider: pypi
   user: naorlivne
@@ -21,3 +22,5 @@ deploy:
   skip_existing: true
   on:
     python: '3.7'
+after_success:
+- codecov
