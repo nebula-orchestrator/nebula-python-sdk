@@ -6,13 +6,13 @@ python:
 - '3.6'
 - '3.7'
 services:
-  - docker
+- docker
 install:
-  - pip install NebulaPythonSDK
-  - pip install codecov
+- pip install NebulaPythonSDK
+- pip install codecov
 script:
-  - sudo sh test/travis_ci_scripts/travis_ci_build_script.sh
-  - coverage run -m unittest
+- sudo sh test/travis_ci_scripts/travis_ci_build_script.sh
+- coverage run -m unittest
 deploy:
   provider: pypi
   user: naorlivne
@@ -22,5 +22,23 @@ deploy:
   skip_existing: true
   on:
     python: '3.7'
+after_deploy:
+- git config credential.helper "store --file=.git/credentials"
+- echo "https://${GH_TOKEN}:@github.com" > .git/credentials
+- git config --local user.name "${GITHUB_USER}"
+- git config --local user.email "${GITHUB_USER_EMAIL}"
+- git commit -m '[skip travis] build $TRAVIS_BUILD_NUMBER pushed - new ${GITHUB_PROJECT} version released'
+- git tag $(python setup.py --version)
+- git push origin $(python setup.py --version)
+- docker run -e GITHUB_USER=nebula-orchestrator -e GITHUB_PROJECT=${GITHUB_PROJECT} -e CHANGELOG_GITHUB_TOKEN=${GH_TOKEN} -v `pwd`:/output naorlivne/github-changelog-generator-dockerized
+- git add CHANGELOG.md
+- git commit -m '[skip travis] build ${TRAVIS_BUILD_NUMBER} pushed - new version changelog'
+- git push origin HEAD:master
 after_success:
 - codecov
+env:
+  global:
+  - secure: kSMdTnYspfGcUy9ofNaPVnEgpbsCYvDlb9zAeVDz5GaGK6oWr7XchOUj2QkFt5giVqI4kDLATPINiOBjUH5QCn9lc4gJfghlx1xb4FAfZiEu8pcoxsgRmIEpZfbnFzsG/U5QcS/eTjUxe9CZvh4HOO6fBKbjjALF3hLPwGl7FJaExPKTEu6bV92dP2KxC15d2pWC0EwRbPS5XHaORVSa67WgWonnrT2UFX7tIeDMphzQcZYrHA4cH+oKeh94GbmhwMVgOI560k+5C+4Ol2nY0Tlrm3oV7YjajXkgCAxT1KE/hcb1dhZPj5A8w+LgMjZjWyW+RysoMngkTIERT0Tw+IWIE/414nY2hu+u3lOEA7YhDjyxtl6W2IhJpl271xigVcZ10EpqEE/cMGCTzhOfbg8VNtRb8SDdcOcvTqWemcTdgdz0/Pf4K7oF+bwsIt7vUNosg10D9ha5qBJQaqQCEfkO2NhU4XIcj4xSzp5V3iGZW3L8Ti2M+JjQPxFvXp5ZKNa0n8TfyKnuQ46Y81RZpXqFkfpS33Ug6nT+i11pB8FEuHsmwy32oiqGZJ+b/fc5p6DRWEqMnjZpa0FpVLdXk368DcMF1io8bQ9+lo+eO63gNUzEFnMNua+sImC/CqBrDUyjwhTU6YYkf9EaR5me/5kqWC3mLuQKCL7wOKnzG9M=
+  - secure: KQ/mkubAVkkfQdiaXjH6IzigCQb5QXX0C6RCYl1DdQhl1rA0je31g6AvyhrP9laaVXEbfMEayFAL7i4LIO5StDKcXEqP/77jiMp3/QiQEBqs5yhA+PxzZorgUTid5mrHorBNL9rL1Lr44n1LUVEb7UxLBQBCAdfO/bbv5mvtBsExvAni1VnImSrng0VYFJ1j+fwmBRX0mcZjLxJ8VPLapvZvDzKWuderw0W7oWLoIKX5PCCgd1cV5LkZk6FYXWq2aXbtKnnrkLoybmC3Ikx2FIx1ZWIfA9YYZY9SAtvQ5VnDW1fwnKVCDasaQcquJ/q3QA9B/Mox6PL6f+gTtsiFGe0SxlW8X4N5Fc9dyGgEtkXJeCwTStTJB8lf73GI5ZgXszdsb5KMiiB2m8Shi2ykKeBNjSXGVLSnZq3nUXSRaEAqUOAQT4eEwRanBDiW2r7CyERKVxfv7cnu02+DKzurcShlNmecyU4uKGISm4kDQFum4N/a9RuZT3dWbroICLUJdktJdNtx2AZe3zaRf9fn1um3yoJq8s8NXQo5WxA2dvX4BS74yU10dhqCJu3gJtMXfnYkGKY18MKDu8OiewXhR7sSBf5XorFBDN+FbwXFxot3BEVB58Qp85mddBnaSdwynDbnpkm3tc0dqfKBBxvXh7MgbxW8/LHlzbCsyethTXU=
+  - secure: ck2/NVxmRwU0FyBihRlvX8+zhl+hEg7DL79yQEfHFERQDJd3dwayiJvA6sEZ+FCQORJYzAKPYHFwrQaqTnknf7stYn9hg7Qr2RJJ2yq/8U7G+E8gU3NSeaMrj1e1A6VnbMjImG0j/ViQe6X+5+gRyRck/8MK8aguOOhMMymtcbcOUiKMAso8PQfManOFMI6zdtU4O4+mRkEUisLBGKHuCzXGRy36TlR1CQHcdYXMsJN2JCG4TP/dqqSGnmtl3iCR8fpTox4soqhbJ8ScaljCVGdMmi1zlotRuXswUwNCcbG8iz9mRBQKNRGVxaH3XDPihtnZ9Zpt6KSbMGCORtgB0iLWAK8bYMhCYIoCY2Snesl/VsNfPdbkjWXdPziIDXAiXrxrVUP5kBMrqbx64qf5mgW87hkpI1KG/0zYn94v8AuPZcXGNhAAPTXgJAFMImYUMSp53byqLpJ6QipPe3JgX9hs6lt+x1pjD2DqulECaEv/4FBOcZsG+3s7cYyX4u6lcxSJf7oBrWZUfbL4ote3bJRMLXErUFnsESN/Uq5vA3VPU3WJC5xZS19tXeRU9YlhdAFSIJBLlp/myN7iMNkO/hiIzFkOVk5EslnpHmdlCuZPn6MJ4hhscZhVKo+HZoFelRJxfbUwtjYEnr6rFo5uSvheIbUCqHJHoGKqD93sXKw=
+  - GITHUB_PROJECT=nebula-python-sdk
