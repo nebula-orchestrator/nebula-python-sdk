@@ -1,5 +1,13 @@
 # Change Log
 
+## [Unreleased](https://github.com/nebula-orchestrator/nebula-python-sdk/tree/HEAD)
+
+[Full Changelog](https://github.com/nebula-orchestrator/nebula-python-sdk/compare/2.6.1...HEAD)
+
+**Closed issues:**
+
+- Add  codecov for code coverage  [\#11](https://github.com/nebula-orchestrator/nebula-python-sdk/issues/11)
+
 ## [2.6.1](https://github.com/nebula-orchestrator/nebula-python-sdk/tree/2.6.1) (2019-05-21)
 [Full Changelog](https://github.com/nebula-orchestrator/nebula-python-sdk/compare/2.5.0...2.6.1)
 
