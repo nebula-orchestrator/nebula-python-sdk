@@ -2,6 +2,10 @@
 
 Travis CI unit tests & auto PyPi push status: [![Build Status](https://travis-ci.org/nebula-orchestrator/nebula-python-sdk.svg?branch=master)](https://travis-ci.org/nebula-orchestrator/nebula-python-sdk)
 
+Code coverage: [![codecov](https://codecov.io/gh/nebula-orchestrator/nebula-python-sdk/branch/master/graph/badge.svg)](https://codecov.io/gh/nebula-orchestrator/nebula-python-sdk)
+
+
+
 An SDK for managing [nebula](https://nebula-orchestrator.github.io/) via python.
 
 translates all of Nebula [API](https://nebula.readthedocs.io/en/latest/api/general/) calls to something more pythonic.
