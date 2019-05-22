@@ -335,7 +335,6 @@ class BaseTests(TestCase):
         self.assertEqual(reply["status_code"], 200)
         self.assertTrue(isinstance(reply["reply"]["user_groups"], list))
 
-
         # check updating a user group
         user_group_config = {"admin": True}
         reply = nebula_connection_object.update_user_group(user_group, user_group_config)
