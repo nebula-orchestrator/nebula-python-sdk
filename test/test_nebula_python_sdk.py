@@ -330,6 +330,12 @@ class BaseTests(TestCase):
         self.assertEqual(reply["reply"]["device_groups"], {})
         self.assertFalse(reply["reply"]["admin"])
 
+        # list all user groups
+        reply = nebula_connection_object.list_user_groups()
+        self.assertEqual(reply["status_code"], 200)
+        self.assertTrue(isinstance(reply["reply"]["user_groups"], list))
+
+
         # check updating a user group
         user_group_config = {"admin": True}
         reply = nebula_connection_object.update_user_group(user_group, user_group_config)
