@@ -6,6 +6,7 @@
 
 **Implemented enhancements:**
 
+- Bump tqdm from 4.32.1 to 4.32.2 [\#20](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/20) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump certifi from 2019.3.9 to 2019.6.16 [\#19](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/19) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump pygments from 2.4.1 to 2.4.2 [\#18](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/18) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump pygments from 2.4.0 to 2.4.1 [\#17](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/17) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
