@@ -177,7 +177,7 @@ class Nebula:
 
     # list device_group configuration
     def list_reports(self, page_size=10, hostname=None, device_group=None, report_creation_time_filter="gt",
-                     report_creation_time=None, last_id=None):
+                     report_creation_time=None, last_id=None, updated=None):
         url = self.host + "/api/" + self.API_VERSION + "/reports"
         headers = self.headers
         querystring = {
@@ -186,7 +186,8 @@ class Nebula:
             "device_group": device_group,
             "report_creation_time_filter": report_creation_time_filter,
             "report_creation_time": report_creation_time,
-            "last_id": last_id
+            "last_id": last_id,
+            "updated": updated
         }
         response = requests.request("GET", url, headers=headers, timeout=self.request_timeout, params=querystring)
         filtered_response = {"status_code": response.status_code, "reply": response.json()}

@@ -231,7 +231,7 @@ class BaseTests(TestCase):
 
     def test_list_reports(self):
         nebula_connection_object = nebula_connection()
-        reply = nebula_connection_object.list_reports(hostname="test_non_existing_hostname",
+        reply = nebula_connection_object.list_reports(hostname="test_non_existing_hostname", updated=None,
                                                       device_group="test_non_existing_device_group",
                                                       report_creation_time=123, report_creation_time_filter="eq")
         self.assertEqual(reply["status_code"], 200)
