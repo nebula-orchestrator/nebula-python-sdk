@@ -6,6 +6,7 @@
 
 **Implemented enhancements:**
 
+- Bump docutils from 0.15.post1 to 0.15.1 [\#22](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/22) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump docutils from 0.14 to 0.15.post1 [\#21](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/21) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 
 ## [2.6.2](https://github.com/nebula-orchestrator/nebula-python-sdk/tree/2.6.2) (2019-07-15)
