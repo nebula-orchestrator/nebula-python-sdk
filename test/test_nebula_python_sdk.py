@@ -108,6 +108,26 @@ class BaseTests(TestCase):
         self.assertEqual(reply["reply"]["app_id"], 5)
         self.assertEqual(reply["reply"]["docker_image"], "httpd:alpine")
 
+        # check app update force all works
+        reply = nebula_connection_object.update_app(app, {"docker_image": "httpd:alpine"}, force_all=True)
+        self.assertEqual(reply["status_code"], 202)
+        self.assertEqual(reply["reply"]["app_id"], 6)
+        self.assertEqual(reply["reply"]["containers_per"], {"server": 1})
+        self.assertEqual(reply["reply"]["app_name"], app)
+        self.assertEqual(reply["reply"]["devices"], [])
+        self.assertEqual(reply["reply"]["docker_image"], "httpd:alpine")
+        self.assertEqual(reply["reply"]["env_vars"], [])
+        self.assertEqual(reply["reply"]["networks"], ["nebula", "bridge"])
+        self.assertFalse(reply["reply"]["privileged"])
+        self.assertFalse(reply["reply"]["rolling_restart"])
+        self.assertTrue(reply["reply"]["running"])
+        self.assertEqual(reply["reply"]["starting_ports"], [])
+        self.assertEqual(reply["reply"]["volumes"], [])
+
+        # check app update force all raise error on missing param
+        reply = nebula_connection_object.update_app(app, {}, force_all=True)
+        self.assertEqual(reply["status_code"], 400)
+
         # check app deletion works
         reply = nebula_connection_object.delete_app(app)
         self.assertEqual(reply["status_code"], 200)
@@ -418,6 +438,18 @@ class BaseTests(TestCase):
         self.assertEqual(reply["reply"]["cron_job_id"], 2)
         self.assertEqual(reply["reply"]["schedule"], "5 5 * * *")
 
+        # check updating a cron_jon force all works
+        reply = nebula_connection_object.update_cron_job(cron_job, {
+            "docker_image": "httpd:alpine",
+            "schedule": "5 5 * * *"
+        }, force_all=True)
+        self.assertEqual(reply["status_code"], 202)
+        self.assertEqual(reply["reply"]["cron_job_id"], 3)
+        self.assertEqual(reply["reply"]["schedule"], "5 5 * * *")
+
+        # check updating a cron_jon force all missing param
+        reply = nebula_connection_object.update_cron_job(cron_job, {"schedule": "5 5 * * *"}, force_all=True)
+        self.assertEqual(reply["status_code"], 400)
         # check cron_jon deletion works
         reply = nebula_connection_object.delete_cron_job(cron_job)
         self.assertEqual(reply["status_code"], 200)

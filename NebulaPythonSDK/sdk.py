@@ -93,11 +93,15 @@ class Nebula:
 
     # update a nebula app, requires the app name and a dict of the config values you want to change, any combination of
     # config values is accepted as it keeps the rest unchanged
-    def update_app(self, app, config):
+    def update_app(self, app, config, force_all=False):
+        if force_all is True:
+            request_type = "POST"
+        else:
+            request_type = "PUT"
         url = self.host + "/api/" + self.API_VERSION + "/apps/" + app + "/update"
         payload = json.dumps(config)
         headers = self.headers
-        response = requests.request("PUT", url, data=payload, headers=headers, timeout=self.request_timeout)
+        response = requests.request(request_type, url, data=payload, headers=headers, timeout=self.request_timeout)
         filtered_response = {"status_code": response.status_code, "reply": response.json()}
         return filtered_response
 
@@ -320,10 +324,14 @@ class Nebula:
 
     # update a nebula cron_job, requires the cron_job name and a dict of the config values you want to change, any
     # combination of config values is accepted as it keeps the rest unchanged
-    def update_cron_job(self, cron_job, config):
+    def update_cron_job(self, cron_job, config, force_all=False):
+        if force_all is True:
+            request_type = "POST"
+        else:
+            request_type = "PUT"
         url = self.host + "/api/" + self.API_VERSION + "/cron_jobs/" + cron_job + "/update"
         payload = json.dumps(config)
         headers = self.headers
-        response = requests.request("PUT", url, data=payload, headers=headers, timeout=self.request_timeout)
+        response = requests.request(request_type, url, data=payload, headers=headers, timeout=self.request_timeout)
         filtered_response = {"status_code": response.status_code, "reply": response.json()}
         return filtered_response
