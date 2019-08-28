@@ -1,8 +1,7 @@
 # Change Log
 
-## [Unreleased](https://github.com/nebula-orchestrator/nebula-python-sdk/tree/HEAD)
-
-[Full Changelog](https://github.com/nebula-orchestrator/nebula-python-sdk/compare/2.6.2...HEAD)
+## [2.7.0](https://github.com/nebula-orchestrator/nebula-python-sdk/tree/2.7.0) (2019-08-28)
+[Full Changelog](https://github.com/nebula-orchestrator/nebula-python-sdk/compare/2.6.2...2.7.0)
 
 **Implemented enhancements:**
 
