@@ -6,6 +6,7 @@
 
 **Implemented enhancements:**
 
+- Bump twine from 2.0.0 to 3.0.0 [\#39](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/39) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump urllib3 from 1.25.6 to 1.25.7 [\#38](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/38) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump tqdm from 4.37.0 to 4.38.0 [\#37](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/37) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump six from 1.12.0 to 1.13.0 [\#36](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/36) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
