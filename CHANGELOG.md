@@ -6,6 +6,8 @@
 
 **Implemented enhancements:**
 
+- Bump tqdm from 4.38.0 to 4.39.0 [\#41](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/41) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump twine from 3.0.0 to 3.1.0 [\#40](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/40) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump twine from 2.0.0 to 3.0.0 [\#39](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/39) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump urllib3 from 1.25.6 to 1.25.7 [\#38](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/38) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump tqdm from 4.37.0 to 4.38.0 [\#37](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/37) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
@@ -28,7 +30,6 @@
 - Bump tqdm from 4.34.0 to 4.35.0 [\#26](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/26) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump tqdm from 4.33.0 to 4.34.0 [\#25](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/25) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump tqdm from 4.32.2 to 4.33.0 [\#24](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/24) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
-- Bump docutils from 0.15.1 to 0.15.2 [\#23](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/23) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump docutils from 0.15.post1 to 0.15.1 [\#22](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/22) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump docutils from 0.14 to 0.15.post1 [\#21](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/21) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 
@@ -53,6 +54,7 @@
 **Implemented enhancements:**
 
 - Auto match version to branch on deployment [\#9](https://github.com/nebula-orchestrator/nebula-python-sdk/issues/9)
+- Bump docutils from 0.15.1 to 0.15.2 [\#23](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/23) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump requests from 2.21.0 to 2.22.0 [\#15](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/15) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump pygments from 2.3.1 to 2.4.0 [\#14](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/14) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump urllib3 from 1.24.2 to 1.25.2 [\#13](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/13) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
