@@ -6,6 +6,7 @@
 
 **Implemented enhancements:**
 
+- Bump pygments from 2.5.1 to 2.5.2 [\#45](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/45) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump certifi from 2019.9.11 to 2019.11.28 [\#44](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/44) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump twine from 3.1.0 to 3.1.1 [\#43](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/43) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump pygments from 2.4.2 to 2.5.1 [\#42](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/42) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
