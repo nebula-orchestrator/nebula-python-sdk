@@ -6,6 +6,8 @@
 
 **Implemented enhancements:**
 
+- Bump requests from 2.22.0 to 2.23.0 [\#59](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/59) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump bleach from 3.1.0 to 3.1.1 [\#57](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/57) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump idna from 2.8 to 2.9 [\#56](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/56) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump tqdm from 4.42.0 to 4.42.1 [\#55](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/55) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump tqdm from 4.41.1 to 4.42.0 [\#54](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/54) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
