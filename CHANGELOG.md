@@ -6,6 +6,7 @@
 
 **Implemented enhancements:**
 
+- Bump readme-renderer from 25.0 to 26.0 [\#68](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/68) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump urllib3 from 1.25.8 to 1.25.9 [\#67](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/67) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump certifi from 2019.11.28 to 2020.4.5.1 [\#66](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/66) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump tqdm from 4.44.1 to 4.45.0 [\#65](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/65) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
