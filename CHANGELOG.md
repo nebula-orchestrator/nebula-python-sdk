@@ -6,6 +6,7 @@
 
 **Implemented enhancements:**
 
+- Bump tqdm from 4.45.0 to 4.46.0 [\#70](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/70) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump bleach from 3.1.4 to 3.1.5 [\#69](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/69) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump readme-renderer from 25.0 to 26.0 [\#68](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/68) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump urllib3 from 1.25.8 to 1.25.9 [\#67](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/67) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
