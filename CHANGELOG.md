@@ -6,6 +6,7 @@
 
 **Implemented enhancements:**
 
+- Bump certifi from 2020.4.5.2 to 2020.6.20 [\#75](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/75) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump requests from 2.23.0 to 2.24.0 [\#74](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/74) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump certifi from 2020.4.5.1 to 2020.4.5.2 [\#73](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/73) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump tqdm from 4.46.0 to 4.46.1 [\#72](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/72) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
