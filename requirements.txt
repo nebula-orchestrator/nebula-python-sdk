@@ -2,7 +2,7 @@ bleach==3.1.5
 certifi==2020.6.20
 chardet==3.0.4
 docutils==0.16
-idna==2.9
+idna==2.10
 pkginfo==1.5.0.1
 Pygments==2.6.1
 readme-renderer==26.0
