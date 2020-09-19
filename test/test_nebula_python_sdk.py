@@ -454,3 +454,18 @@ class BaseTests(TestCase):
         reply = nebula_connection_object.delete_cron_job(cron_job)
         self.assertEqual(reply["status_code"], 200)
         self.assertEqual(reply["reply"], {})
+
+    def test_nebula_connection_with_host_uri(self):
+        nebula_user = os.getenv("NEBULA_TEST_USERNAME", "nebula")
+        nebula_password = os.getenv("NEBULA_TEST_PASSWORD", "nebula")
+        nebula_host_uri = os.getenv("NEBULA_HOST_URI", "http://127.0.0.1:80")
+        connection = Nebula(username=nebula_user, password=nebula_password, host_uri=nebula_host_uri)
+
+        # check that the host param is set correctly
+        self.assertEqual(connection.host, nebula_host_uri)
+
+        # check that connects to manager successfully
+        reply = connection.check_api()
+        self.assertEqual(reply["status_code"], 200)
+        self.assertEqual(reply["reply"]["api_available"], True)
+
