@@ -1,8 +1,8 @@
 # Changelog
 
-## [Unreleased](https://github.com/nebula-orchestrator/nebula-python-sdk/tree/HEAD)
+## [2.8.0](https://github.com/nebula-orchestrator/nebula-python-sdk/tree/2.8.0) (2020-09-22)
 
-[Full Changelog](https://github.com/nebula-orchestrator/nebula-python-sdk/compare/2.7.0...HEAD)
+[Full Changelog](https://github.com/nebula-orchestrator/nebula-python-sdk/compare/2.7.0...2.8.0)
 
 **Implemented enhancements:**
 
@@ -66,6 +66,10 @@
 - Bump tqdm from 4.35.0 to 4.36.0 [\#29](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/29) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump certifi from 2019.6.16 to 2019.9.11 [\#28](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/28) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump twine from 1.13.0 to 1.14.0 [\#27](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/27) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+
+**Merged pull requests:**
+
+- Added support for providing host\_uri argument when creating a Nebula object [\#87](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/87) ([vineyyadav](https://github.com/vineyyadav))
 
 ## [2.7.0](https://github.com/nebula-orchestrator/nebula-python-sdk/tree/2.7.0) (2019-08-28)
 
