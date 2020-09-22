@@ -12,14 +12,17 @@ class Nebula:
     # the nebula class init module serves as the login against the nebula API as it's the only shared thing among the
     # class functions
     def __init__(self, username=None, password=None, token=None, host="127.0.0.1", port=80, protocol="http",
-                 request_timeout=60):
+                 host_uri=None, request_timeout=60):
         self.request_timeout = request_timeout
         self.username = username
         self.password = password
         self.token = token
         self.protocol = protocol
         self.port = port
-        self.host = protocol + "://" + host + ":" + str(port)
+        if host_uri:
+            self.host = host_uri
+        else:
+            self.host = protocol + "://" + host + ":" + str(port)
         self.headers = {
             'content-type': "application/json",
             'cache-control': "no-cache"
