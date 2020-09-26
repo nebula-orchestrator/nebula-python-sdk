@@ -1,5 +1,17 @@
 # Changelog
 
+## [Unreleased](https://github.com/nebula-orchestrator/nebula-python-sdk/tree/HEAD)
+
+[Full Changelog](https://github.com/nebula-orchestrator/nebula-python-sdk/compare/2.8.0...HEAD)
+
+**Fixed bugs:**
+
+- Dependabot couldn't authenticate with https://pypi.python.org/simple/ [\#89](https://github.com/nebula-orchestrator/nebula-python-sdk/issues/89)
+
+**Merged pull requests:**
+
+- Create Dependabot config file [\#90](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/90) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+
 ## [2.8.0](https://github.com/nebula-orchestrator/nebula-python-sdk/tree/2.8.0) (2020-09-22)
 
 [Full Changelog](https://github.com/nebula-orchestrator/nebula-python-sdk/compare/2.7.0...2.8.0)
