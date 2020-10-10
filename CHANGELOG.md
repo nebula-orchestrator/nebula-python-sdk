@@ -6,6 +6,7 @@
 
 **Implemented enhancements:**
 
+- Bump tqdm from 4.50.1 to 4.50.2 [\#93](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/93) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump tqdm from 4.50.0 to 4.50.1 [\#92](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/92) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump tqdm from 4.49.0 to 4.50.0 [\#91](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/91) ([dependabot[bot]](https://github.com/apps/dependabot))
 
