@@ -6,6 +6,11 @@
 
 **Implemented enhancements:**
 
+- Bump tqdm from 4.51.0 to 4.52.0 [\#106](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/106) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump urllib3 from 1.26.1 to 1.26.2 [\#105](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/105) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump requests from 2.24.0 to 2.25.0 [\#104](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/104) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump urllib3 from 1.25.11 to 1.26.1 [\#103](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/103) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump certifi from 2020.6.20 to 2020.11.8 [\#101](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/101) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump pkginfo from 1.6.0 to 1.6.1 [\#100](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/100) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump tqdm from 4.50.2 to 4.51.0 [\#99](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/99) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump pygments from 2.7.1 to 2.7.2 [\#98](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/98) ([dependabot[bot]](https://github.com/apps/dependabot))
