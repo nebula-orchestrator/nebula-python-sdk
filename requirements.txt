@@ -4,7 +4,7 @@ chardet==3.0.4
 docutils==0.16
 idna==2.10
 pkginfo==1.6.1
-Pygments==2.7.2
+Pygments==2.7.3
 readme-renderer==28.0
 requests==2.25.0
 requests-toolbelt==0.9.1
