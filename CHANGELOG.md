@@ -99,7 +99,6 @@
 - Bump urllib3 from 1.25.5 to 1.25.6 [\#34](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/34) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump twine from 1.15.0 to 2.0.0 [\#33](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/33) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump urllib3 from 1.25.3 to 1.25.5 [\#32](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/32) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
-- Bump tqdm from 4.36.0 to 4.36.1 [\#31](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/31) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump twine from 1.14.0 to 1.15.0 [\#30](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/30) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump tqdm from 4.35.0 to 4.36.0 [\#29](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/29) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump certifi from 2019.6.16 to 2019.9.11 [\#28](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/28) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
@@ -123,6 +122,7 @@
 
 **Implemented enhancements:**
 
+- Bump tqdm from 4.36.0 to 4.36.1 [\#31](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/31) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump tqdm from 4.33.0 to 4.34.0 [\#25](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/25) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump tqdm from 4.32.2 to 4.33.0 [\#24](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/24) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump docutils from 0.15.1 to 0.15.2 [\#23](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/23) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
