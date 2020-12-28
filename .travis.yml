@@ -28,10 +28,12 @@ after_deploy:
 - echo "https://${GH_TOKEN}:@github.com" > .git/credentials
 - git config --local user.name "${GITHUB_USER}"
 - git config --local user.email "${GITHUB_USER_EMAIL}"
-- git commit -m '[skip travis] build ${TRAVIS_BUILD_NUMBER} pushed - new ${GITHUB_PROJECT} version released'
+- git commit -m '[skip travis] build ${TRAVIS_BUILD_NUMBER} pushed - new ${GITHUB_PROJECT}
+  version released'
 - git tag $(python setup.py --version)
 - git push origin $(python setup.py --version)
-- docker run -e GITHUB_USER=nebula-orchestrator -e GITHUB_PROJECT=${GITHUB_PROJECT} -e CHANGELOG_GITHUB_TOKEN=${GH_TOKEN} -v `pwd`:/output naorlivne/github-changelog-generator-dockerized
+- docker run -e GITHUB_USER=nebula-orchestrator -e GITHUB_PROJECT=${GITHUB_PROJECT}
+  -e CHANGELOG_GITHUB_TOKEN=${GH_TOKEN} -v `pwd`:/output naorlivne/github-changelog-generator-dockerized
 - git add CHANGELOG.md
 - git commit -m '[skip travis] build ${TRAVIS_BUILD_NUMBER} pushed - new version changelog'
 - git push origin HEAD:master
@@ -43,3 +45,5 @@ env:
   - secure: KQ/mkubAVkkfQdiaXjH6IzigCQb5QXX0C6RCYl1DdQhl1rA0je31g6AvyhrP9laaVXEbfMEayFAL7i4LIO5StDKcXEqP/77jiMp3/QiQEBqs5yhA+PxzZorgUTid5mrHorBNL9rL1Lr44n1LUVEb7UxLBQBCAdfO/bbv5mvtBsExvAni1VnImSrng0VYFJ1j+fwmBRX0mcZjLxJ8VPLapvZvDzKWuderw0W7oWLoIKX5PCCgd1cV5LkZk6FYXWq2aXbtKnnrkLoybmC3Ikx2FIx1ZWIfA9YYZY9SAtvQ5VnDW1fwnKVCDasaQcquJ/q3QA9B/Mox6PL6f+gTtsiFGe0SxlW8X4N5Fc9dyGgEtkXJeCwTStTJB8lf73GI5ZgXszdsb5KMiiB2m8Shi2ykKeBNjSXGVLSnZq3nUXSRaEAqUOAQT4eEwRanBDiW2r7CyERKVxfv7cnu02+DKzurcShlNmecyU4uKGISm4kDQFum4N/a9RuZT3dWbroICLUJdktJdNtx2AZe3zaRf9fn1um3yoJq8s8NXQo5WxA2dvX4BS74yU10dhqCJu3gJtMXfnYkGKY18MKDu8OiewXhR7sSBf5XorFBDN+FbwXFxot3BEVB58Qp85mddBnaSdwynDbnpkm3tc0dqfKBBxvXh7MgbxW8/LHlzbCsyethTXU=
   - secure: ck2/NVxmRwU0FyBihRlvX8+zhl+hEg7DL79yQEfHFERQDJd3dwayiJvA6sEZ+FCQORJYzAKPYHFwrQaqTnknf7stYn9hg7Qr2RJJ2yq/8U7G+E8gU3NSeaMrj1e1A6VnbMjImG0j/ViQe6X+5+gRyRck/8MK8aguOOhMMymtcbcOUiKMAso8PQfManOFMI6zdtU4O4+mRkEUisLBGKHuCzXGRy36TlR1CQHcdYXMsJN2JCG4TP/dqqSGnmtl3iCR8fpTox4soqhbJ8ScaljCVGdMmi1zlotRuXswUwNCcbG8iz9mRBQKNRGVxaH3XDPihtnZ9Zpt6KSbMGCORtgB0iLWAK8bYMhCYIoCY2Snesl/VsNfPdbkjWXdPziIDXAiXrxrVUP5kBMrqbx64qf5mgW87hkpI1KG/0zYn94v8AuPZcXGNhAAPTXgJAFMImYUMSp53byqLpJ6QipPe3JgX9hs6lt+x1pjD2DqulECaEv/4FBOcZsG+3s7cYyX4u6lcxSJf7oBrWZUfbL4ote3bJRMLXErUFnsESN/Uq5vA3VPU3WJC5xZS19tXeRU9YlhdAFSIJBLlp/myN7iMNkO/hiIzFkOVk5EslnpHmdlCuZPn6MJ4hhscZhVKo+HZoFelRJxfbUwtjYEnr6rFo5uSvheIbUCqHJHoGKqD93sXKw=
   - GITHUB_PROJECT=nebula-python-sdk
+  - secure: GQOGx8jE8xxK3x+iG8+vMovt9nGn4DGoswvnxPz9+d5hq2eD/U/dxNRKGMdh5rp6ewwqzAiVWZDVq7wV6OGytmbXhsW0i08aw4oaZP7NNVmFsS/lwzTuEc/+GECjpNXW1mLH0v2XOLEBI4a3ODD1CMD8Rr95nirCGUZ9/LAiQNv+U8hq2uoei+8HLGxRmxT5rjXcnkhoZWMdMe5/mbtECSyTKnDOCRUevbai185+DdYuInJeN1LWt3ISrziUHuYBanWJfUtgCoBtUzCB1F1qNOqyC2k+64Se1YxsoOWIdsaBJM3kTfvgBqKw0gVah7JJsgxMsh0PnNehv90FjGt+LMy6dFJKF7eku9FiTwpWzxujBEySA1BJDkrXoMPBKYOUbXwWF9lS1xSYsePKtvOib16/epOvhqftw9hPMxmPMPF6sIIQwGqu8Qo+LQ6zVoCaBkYdWUcX5lacCrUOg9/qnrkPRos0fcSaHqygsM7O6Cfv40nb5oog38xXafVbDijqt9jzL019m5jmmx5vBUMjnyUppcRtZgCY95aMvg3WRBnxKxMEmATj8ue3DurhlId+yBup6R8qN+9dFqxr+RwmEskkSXjBFnxUbZClJNB0/M1hij1FxKregqRBXciA0ZNgMCD4vai0NP1FCN0n0HvY2SqSyYVQJPHIFK1XJ6G5+wE=
+  - secure: ZY+gYmM1NP3uJQcUu8rJ9yEDbUPeDX/3XcgMNw+kogQEEVSzvBHrMpKc8UsmBb601u5oKMijjVC+/dwSZT2u2jEVj4S6Hd1uNlQSY5s8v1vm/pnTZOOhA6DXkT228xuwTfflaqS0B4eQOu6tMnUf7/vYPhZh1ct07tRnB7xOl9Dy8dKEZ+o9eirUOgn7AVYpIx78BR8bLVkZoggSTfp3NRB8R+VEIUFaZ8HafmKE5x/x7Ny27v83bPeY7dltbU3GRRzPsjyWmeu51ZpH13bHcH0rcGueDY2xz6Mi1PUcgmmSv06KV5g5uHonDK7uA6C2cU/JOOqlzEyBaG5czf3gAsPfBvw5ytStYM8LyY7Tidlxx1PgUz8dKSAYeU8Z5mO7z1mnUD0KAgS7PIZv2NFLInMszqopDjS8cvv1t5yZ2sjIfvsqhoY++wQ89Qd3ZZCzmOrurC0Njmo9mbV61xtTjVQ+X8FGL3HCaOE5hfglgX+ur42nJi1HXTvr/pvFFSYyAFiZHBaa0vBk5RLmi8YLfaiJhwMC/rI+meKr7mleryAYJCXlILImtk23k5gRmotga0rWxKQdGUg1kkPyE6ORUWlheuXTiBww6C5Vfxn1WjdzdrV+KwDYDQsOeM+HKvv0h2SRjYefGgnRdD51VeIFSjXH7VHXkGFXAOTJ+jWAOaE=
