@@ -6,6 +6,7 @@
 
 **Implemented enhancements:**
 
+- Bump tqdm from 4.55.0 to 4.55.1 [\#117](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/117) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump tqdm from 4.54.1 to 4.55.0 [\#115](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/115) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump twine from 3.2.0 to 3.3.0 [\#114](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/114) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump requests from 2.25.0 to 2.25.1 [\#113](https://github.com/nebula-orchestrator/nebula-python-sdk/pull/113) ([dependabot[bot]](https://github.com/apps/dependabot))
