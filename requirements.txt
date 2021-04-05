@@ -1,7 +1,7 @@
 bleach==3.3.0
 certifi==2020.12.5
 chardet==4.0.0
-docutils==0.16
+docutils==0.17
 idna==2.10
 pkginfo==1.7.0
 Pygments==2.8.1
