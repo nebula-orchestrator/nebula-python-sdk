@@ -3,7 +3,7 @@ certifi==2022.5.18.1
 chardet==4.0.0
 docutils==0.18.1
 idna==3.3
-pkginfo==1.8.2
+pkginfo==1.8.3
 Pygments==2.12.0
 readme-renderer==35.0
 requests==2.27.1
