@@ -1,6 +1,6 @@
 bleach==5.0.1
 certifi==2022.6.15
-chardet==4.0.0
+chardet==5.0.0
 docutils==0.18.1
 idna==3.3
 pkginfo==1.8.3
