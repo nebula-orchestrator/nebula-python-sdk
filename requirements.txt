@@ -1,4 +1,4 @@
-bleach==5.0.0
+bleach==5.0.1
 certifi==2022.6.15
 chardet==4.0.0
 docutils==0.18.1
