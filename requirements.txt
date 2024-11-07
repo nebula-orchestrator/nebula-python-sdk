@@ -9,7 +9,7 @@ readme-renderer==44.0
 requests==2.32.3
 requests-toolbelt==1.0.0
 six==1.16.0
-tqdm==4.66.6
+tqdm==4.67.0
 twine==5.1.1
 urllib3==2.2.3
 webencodings==0.5.1
