@@ -8,7 +8,7 @@ Pygments==2.18.0
 readme-renderer==44.0
 requests==2.32.3
 requests-toolbelt==1.0.0
-six==1.16.0
+six==1.17.0
 tqdm==4.67.1
 twine==6.1.0
 urllib3==2.2.3
